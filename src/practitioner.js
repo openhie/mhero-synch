@@ -1,7 +1,19 @@
 var Q = require('q');
 
 var Practitioner = function (item) {
-    this.item = item;
+    var jsonContent = JSON.parse(item['atom:content']['#']);
+    this.globalId = jsonContent.identifier[0].value;
+    this.familyName = jsonContent.name.family[0];
+    this.givenName = jsonContent.name.given[0];
+    this.email = getEmail(jsonContent);
+
+    function getEmail(jsonContent) {
+        var contact = jsonContent.contact;
+        if(contact.length == 0) {
+            return null;
+        }
+        return contact[0].value;
+    }
 };
 
 Practitioner.load_all = function () {
