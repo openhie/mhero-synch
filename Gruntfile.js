@@ -10,17 +10,26 @@ module.exports = function (grunt) {
             '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
             '* Copyright (c) <%= grunt.template.today("yyyy") %> ',
 
-        karma: {
-            unit: {
-                configFile: 'config/karma.conf.js'
-            }
+        jasmine_node: {
+            options: {
+                forceExit: true,
+                jUnit: {
+                    report: true,
+                    savePath: "./reports/",
+                    useDotNotation: true,
+                    consolidate: true
+                }
+            },
+            integration: ['test/integration/'],
+            unit: ['test/unit/'],
+            all: ['test']
         }
 
     });
 
-    grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-jasmine-node');
 
 
     // Default task.
-    grunt.registerTask('default', ['karma:unit']);
+    grunt.registerTask('default', ['jasmine_node:unit']);
 };
