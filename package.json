@@ -22,5 +22,6 @@
     "jasmine-node": "~2.0.0"
   },
   "dependencies": {
+      "feedparser": "0.19.1"
   }
 }

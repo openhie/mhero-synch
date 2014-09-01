@@ -3,6 +3,7 @@ module.exports = function (config) {
         basePath: '../',
 
         files: [
+            'src/**/*.js',
             'test/lib/*.js',
             'test/unit/**/*.js'
         ],
