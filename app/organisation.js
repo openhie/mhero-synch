@@ -4,6 +4,13 @@ var Organisation = function (item) {
     this.name = jsonContent.name;
     this.parentId = getParentId();
 
+    this.fullName = function () {
+        if(!this.parent) {
+            return this.name;
+        }
+        return this.name + '-' + this.parent.fullName();
+    };
+
     function getParentId() {
         return jsonContent.partOf ? jsonContent.partOf.reference : null;
     }

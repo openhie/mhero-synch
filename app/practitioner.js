@@ -8,10 +8,11 @@ var Practitioner = function (item) {
     this.phone = getContact(jsonContent, 'BP');
 
     function getParentId() {
-        if(!jsonContent.organization) {
+        var location = jsonContent.location;
+        if(!location || location.length == 0) {
             return null;
         }
-        return jsonContent.organization.reference;
+        return location[0].reference;
     }
 
     function getContact(jsonContent, contactField) {
