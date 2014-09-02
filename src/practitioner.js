@@ -27,7 +27,6 @@ Practitioner.load_all = function () {
     var request = require('request'),
         FeedParser = require('feedparser');
 
-
     var req = request('http://liberia-staging.mhero.org:8984/CSD/csr/dhis2_training_liberia/careServicesRequest/urn:openhie.org:openinfoman-fhir:fhir_practitioner_read/adapter/fhir/Practitioner/_search?name.text=&_format=json&organization.reference=&location.reference=');
     var feedParser = new FeedParser([]);
 

@@ -6,6 +6,7 @@
         "grunt": "0.4.1",
         "grunt-cli": "*",
         "grunt-jasmine-node": "~0.2.1",
+        "jasmine-reporters": "~0.2.1",
         "jasmine-node": "~2.0.0",
         "request": "~2.34.0"
     },
