@@ -3,7 +3,7 @@ var Practitioner = require(__dirname + '/../../app/practitioner');
 describe('Practitioner', function () {
     describe('loadAll', function () {
         it('loads all practitioners from a remote end point', function (done) {
-            var endPointUrl = 'http://liberia-staging.mhero.org:8984/CSD/csr/merged_sierra_leone/careServicesRequest/urn:openhie.org:openinfoman-fhir:fhir_practitioner_read/adapter/fhir/Practitioner/_search?_format=json&name.text=&organization.reference=&location.reference='
+            var endPointUrl = 'http://liberia-staging.mhero.org:8984/CSD/csr/merged_sierra_leone/careServicesRequest/urn:openhie.org:openinfoman-fhir:fhir_practitioner_read/adapter/fhir/Practitioner/_history?_format=json&_since=1900-01-01'
             Practitioner.loadAll(endPointUrl).then(function (allPractitioners) {
                 expect(allPractitioners.length).toBe(1038);
 
