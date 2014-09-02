@@ -1,4 +1,5 @@
 mhero-synch.iml
 .idea
+*.swp
 node_modules
 reports
