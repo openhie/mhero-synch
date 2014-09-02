@@ -17,22 +17,22 @@ var Organisation = function (item) {
     }
 };
 
+Organisation.findById = function(allOrganisations, globalId) {
+    return allOrganisations.filter(function (organisation) {
+        return organisation.globalId == globalId;
+    })[0];
+};
+
 Organisation.loadAll = function (url) {
     var FeedReader = require(__dirname + '/feed-reader');
     var feedReader = new FeedReader(Organisation, url);
-
-    function findOrganisation(allOrganisations, globalId) {
-        return allOrganisations.filter(function (organisation) {
-            return organisation.globalId == globalId;
-        })[0];
-    }
 
     return feedReader.loadAll().then(function (allOrganisations) {
         allOrganisations.forEach(function (organisation) {
             if (organisation.parentId == null) {
                 return;
             }
-            var parentOrganisation = findOrganisation(allOrganisations, organisation.parentId);
+            var parentOrganisation = Organisation.findById(allOrganisations, organisation.parentId);
             parentOrganisation.addChild(organisation);
         });
         return allOrganisations;
