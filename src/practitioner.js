@@ -5,14 +5,19 @@ var Practitioner = function (item) {
     this.globalId = jsonContent.identifier[0].value;
     this.familyName = jsonContent.name.family[0];
     this.givenName = jsonContent.name.given[0];
-    this.email = getEmail(jsonContent);
+    this.email = getContact(jsonContent, 'EMAIL');
+    this.phone = getContact(jsonContent, 'BP');
 
-    function getEmail(jsonContent) {
-        var contact = jsonContent.contact;
+    function getContact(jsonContent, contactField) {
+        var contact = jsonContent.telecom;
         if(contact.length == 0) {
             return null;
         }
-        return contact[0].value;
+
+        var specifiedContact = contact.filter(function (aContact) {
+            return aContact.system == contactField;
+        })[0];
+        return specifiedContact == undefined ? null : specifiedContact.value.trim();
     }
 };
 
