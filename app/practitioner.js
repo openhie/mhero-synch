@@ -7,6 +7,15 @@ var Practitioner = function (item) {
     this.email = getContact(jsonContent, 'EMAIL');
     this.phone = getContact(jsonContent, 'BP');
 
+    this.toRapidProContact = function () {
+        var contact = { name: this.familyName + ' ' + this.givenName };
+        if (this.parent) {
+            contact.groups = [this.parent.fullName()]
+        }
+        contact.phone = this.phone;
+        return contact;
+    };
+
     function getParentId() {
         var location = jsonContent.location;
         if (!location || location.length == 0) {
@@ -51,27 +60,10 @@ Practitioner.merge = function (allPractitioners, allLocations, allOrganisations)
     return allPractitioners;
 };
 
-Practitioner.formatForRapidPro = function(allPractitioners){
-  //WIP: Foregoing ommiting contacts without phone numbers till we get the correct data
-  var formattedPractioners = []
-
-    var getParentName = function(practitioner){
-        if(!practitioner.parent){
-            return null;
-        }
-        return practitioner.parent.name;
-    }
-
-    allPractitioners.forEach(function(practitioner){
-        var contact = { name: practitioner.familyName+ ' '+ practitioner.givenName }
-        if (practitioner.parent){
-            contact["groups"] = [getParentName(practitioner)]
-        }
-        contact["urns"] =['tel: ' + practitioner.phone]
-        formattedPractioners.push(contact);
+Practitioner.formatForRapidPro = function (allPractitioners) {
+    return allPractitioners.map(function (practitioner) {
+        return practitioner.toRapidProContact();
     });
-
-    return formattedPractioners;
 };
 
 module.exports = Practitioner;

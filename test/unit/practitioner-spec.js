@@ -1,6 +1,8 @@
 var Practitioner = require(__dirname + '/../../app/practitioner');
 
 describe('Practitioner', function () {
+    var Fixtures = require(__dirname + '/../fixtures/fixtures');
+
     describe('loadAll', function () {
         it('loads all practitioners from a remote end point', function (done) {
             var endPointUrl = 'http://liberia-staging.mhero.org:8984/CSD/csr/merged_sierra_leone/careServicesRequest/urn:openhie.org:openinfoman-fhir:fhir_practitioner_read/adapter/fhir/Practitioner/_history?_format=json&_since=1900-01-01'
@@ -22,8 +24,6 @@ describe('Practitioner', function () {
 
     describe('merge', function () {
         it('merges all practitioners, locations and organisations in a hierarchy', function () {
-            var Fixtures = require(__dirname + '/../fixtures/fixtures');
-
             var allPractitioners = Fixtures.practitioners();
             var allLocations = Fixtures.locations();
             var allOrganisations = Fixtures.organisations();
@@ -39,21 +39,19 @@ describe('Practitioner', function () {
 
     describe('formatForRapidPro', function () {
         it('formats all practitioners data into the format accepted by rapidpro', function () {
-            var Fixtures = require(__dirname + '/../fixtures/fixtures');
-
             var allPractitioners = Fixtures.practitioners();
             var allLocations = Fixtures.locations();
             var allOrganisations = Fixtures.organisations();
 
             var mergedPractitioners = Practitioner.merge(allPractitioners, allLocations, allOrganisations);
+            var rapidProContacts = Practitioner.formatForRapidPro(mergedPractitioners);
 
-            var formattedPractioners = Practitioner.formatForRapidPro(mergedPractitioners);
-
-            console.log(formattedPractioners[0])
-            expect(formattedPractioners[0].urns[0]).toBe('tel: null');
-            expect(formattedPractioners.length).toBe(3);
-            expect(formattedPractioners[0].name).toBe('mr bill Traifrop');
-            expect(formattedPractioners[0].groups[0]).toBe('York CHC');
+            expect(rapidProContacts.length).toBe(3);
+            var firstRapidProContact = rapidProContacts[0];
+            //WIP: Foregoing ommiting contacts without phone numbers till we get the correct data
+            expect(firstRapidProContact.phone).toBe(null);
+            expect(firstRapidProContact.name).toBe('mr bill Traifrop');
+            expect(firstRapidProContact.groups[0]).toBe('York CHC-Sittia-Sierra Leone');
         });
     });
 });
