@@ -22,20 +22,9 @@ describe('Practitioner', function () {
 
     describe('merge', function () {
         it('merges all practitioners, locations and organisations in a hierarchy', function () {
-            var allPractitioners = [
-                {
-                    globalId: 'practitioner_1',
-                    parentId: 'location_1'
-                },
-                {
-                    globalId: 'practitioner_2',
-                    parentId: 'location_1'
-                },
-                {
-                    globalId: 'practitioner_3',
-                    parentId: 'location_2'
-                }
-            ];
+            var Fixtures = require(__dirname + '/../fixtures/fixtures');
+
+            var allPractitioners = Fixtures.practitioners();
 
             var allLocations = [
                 {

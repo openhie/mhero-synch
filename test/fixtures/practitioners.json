@@ -1,0 +1,143 @@
+[
+    {
+        "resourceType": "Practitioner",
+        "identifier": [
+            {
+                "value": "practitioner_1",
+                "assigner": "http://demo.ihris.org/manage"
+            }
+        ],
+        "name": {
+            "text": "mr bill, Traifrop",
+            "family": [
+                "mr bill"
+            ],
+            "given": [
+                "Traifrop"
+            ],
+            "prefix": [
+                ""
+            ]
+        },
+        "telecom": [
+        ],
+        "organization": {
+            "reference": "urn:dhis.org:sierra-leone-demo:csd:organization:ImspTQPwCqd"
+        },
+        "role": [
+            {
+                "coding": [
+                    {
+                        "system": "urn:oid:2.25.11111176868615247452370557526986886924",
+                        "code": "PHM"
+                    }
+                ]
+            }
+        ],
+        "specialty": [
+        ],
+        "location": [
+            {
+                "reference": "location_1"
+            }
+        ],
+        "qualification": [
+        ],
+        "communication": [
+        ]
+    },
+    {
+        "resourceType": "Practitioner",
+        "identifier": [
+            {
+                "value": "practitioner_2",
+                "assigner": "http://demo.ihris.org/manage"
+            }
+        ],
+        "name": {
+            "text": "Caij, Sluvothaecre",
+            "family": [
+                "Caij"
+            ],
+            "given": [
+                "Sluvothaecre"
+            ],
+            "prefix": [
+                ""
+            ]
+        },
+        "telecom": [
+        ],
+        "organization": {
+            "reference": "urn:dhis.org:sierra-leone-demo:csd:organization:ImspTQPwCqd"
+        },
+        "role": [
+            {
+                "coding": [
+                    {
+                        "system": "urn:oid:2.25.11111176868615247452370557526986886924",
+                        "code": "MD"
+                    }
+                ]
+            }
+        ],
+        "specialty": [
+        ],
+        "location": [
+            {
+                "reference": "location_2"
+            }
+        ],
+        "qualification": [
+        ],
+        "communication": [
+        ]
+    },
+    {
+        "resourceType": "Practitioner",
+        "identifier": [
+            {
+                "value": "practitioner_3",
+                "assigner": "http://demo.ihris.org/manage"
+            }
+        ],
+        "name": {
+            "text": "Praiwo Boojo, Staiduthou",
+            "family": [
+                "Praiwo Boojo"
+            ],
+            "given": [
+                "Staiduthou"
+            ],
+            "prefix": [
+                ""
+            ]
+        },
+        "telecom": [
+        ],
+        "organization": {
+            "reference": "urn:dhis.org:sierra-leone-demo:csd:organization:ImspTQPwCqd"
+        },
+        "role": [
+            {
+                "coding": [
+                    {
+                        "system": "urn:oid:2.25.11111176868615247452370557526986886924",
+                        "code": "MD"
+                    }
+                ]
+            }
+        ],
+        "specialty": [
+        ],
+        "location": [
+            {
+                "reference": "location_3"
+            }
+        ],
+        "qualification": [
+        ],
+        "communication": [
+        ]
+    }
+]

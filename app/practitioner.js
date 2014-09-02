@@ -9,7 +9,7 @@ var Practitioner = function (item) {
 
     function getParentId() {
         var location = jsonContent.location;
-        if(!location || location.length == 0) {
+        if (!location || location.length == 0) {
             return null;
         }
         return location[0].reference;
