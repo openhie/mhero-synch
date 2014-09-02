@@ -14,7 +14,7 @@ describe('Practitioner', function () {
                 expect(firstPractitioner.phone).toBe(null);
 
                 var fifthPractitioner = allPractitioners[4];
-                expect(fifthPractitioner.phone).toBe('2368479156');
+                expect(fifthPractitioner.phone).toBe('236847915');
 
                 done();
             });
