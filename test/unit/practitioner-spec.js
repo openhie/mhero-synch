@@ -5,7 +5,7 @@ describe('Practitioner', function () {
         it('loads all practitioners from a remote end point', function (done) {
             var endPointUrl = 'http://liberia-staging.mhero.org:8984/CSD/csr/dhis2_training_liberia/careServicesRequest/urn:openhie.org:openinfoman-fhir:fhir_practitioner_read/adapter/fhir/Practitioner/_search?name.text=&_format=json&organization.reference=&location.reference='
             Practitioner.loadAll(endPointUrl).then(function (allPractitioners) {
-                expect(allPractitioners.length).toBe(50);
+                expect(allPractitioners.length).toBe(200);
 
                 var firstPractitioner = allPractitioners[0];
                 expect(firstPractitioner.globalId).toBe('urn:dhis.org:liberia-training:csd:provider:dbQGGwj9Dke');

@@ -1,5 +1,7 @@
-var Organisation = function() {
-
+var Organisation = function(item) {
+    var jsonContent = JSON.parse(item['atom:content']['#']);
+    this.globalId = jsonContent.identifier[0].value;
+    this.name = jsonContent.name;
 };
 
 Organisation.loadAll = function(url) {
