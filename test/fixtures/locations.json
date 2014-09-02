@@ -1,0 +1,62 @@
+[
+    {
+        "resourceType": "Location",
+        "identifier": [
+            {
+                "value": "location_1",
+                "assigner": "http://demo.dhis2.org"
+            },
+            {
+                "value": "xa4F6gesVJm",
+                "assigner": "dhis.org:orgid"
+            }
+        ],
+        "name": "York CHC",
+        "type": [
+            {
+                "coding": [
+                    {
+                        "system": "urn:oid:2.25.268234768686152474523705575269868869248.2",
+                        "code": "4"
+                    }
+                ]
+            }
+        ],
+        "telecom": [
+        ],
+        "managingOrganization": {
+            "reference": "organisation_1"
+        },
+        "status": "active"
+    },
+    {
+        "resourceType": "Location",
+        "identifier": [
+            {
+                "value": "location_2",
+                "assigner": "http://demo.dhis2.org"
+            },
+            {
+                "value": "KfUCAQoOIae",
+                "assigner": "dhis.org:orgid"
+            }
+        ],
+        "name": "Pelewahun (Baoma) MCHP",
+        "type": [
+            {
+                "coding": [
+                    {
+                        "system": "urn:oid:2.25.268234768686152474523705575269868869248.2",
+                        "code": "4"
+                    }
+                ]
+            }
+        ],
+        "telecom": [
+        ],
+        "managingOrganization": {
+            "reference": "organisation_1"
+        },
+        "status": "active"
+    }
+]

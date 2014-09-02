@@ -25,32 +25,15 @@ describe('Practitioner', function () {
             var Fixtures = require(__dirname + '/../fixtures/fixtures');
 
             var allPractitioners = Fixtures.practitioners();
-
-            var allLocations = [
-                {
-                    globalId: 'location_1',
-                    parentId: 'organisation_1',
-                    name: 'Loc1'
-                },
-                {
-                    globalId: 'location_2',
-                    parentId: 'organisation_1',
-                    name: 'Loc2'
-                }
-            ];
-
-            var allOrganisations = [
-                {
-                    globalId: 'organisation_1',
-                    name: 'Org1'
-                }
-            ];
+            var allLocations = Fixtures.locations();
+            var allOrganisations = Fixtures.organisations();
 
             var mergedPractitioners = Practitioner.merge(allPractitioners, allLocations, allOrganisations);
 
             expect(mergedPractitioners.length).toBe(3);
             expect(mergedPractitioners[0].parent.globalId).toBe('location_1');
             expect(mergedPractitioners[0].parent.parent.globalId).toBe('organisation_1');
+            expect(allLocations[0].fullName()).toBe('York CHC-Sittia-Sierra Leone')
         });
     });
 });

@@ -1,0 +1,51 @@
+[
+    {
+        "resourceType": "Organization",
+        "identifier": [
+            {
+                "value": "organisation_1",
+                "assigner": "http://demo.dhis2.org"
+            }
+        ],
+        "name": "Sittia",
+        "type": [
+            {
+                "coding": [
+                    {
+                        "system": "urn:oid:2.25.268234768686152474523705575269868869248.1",
+                        "code": "3"
+                    }
+                ]
+            }
+        ],
+        "telecom": [
+        ],
+        "partOf": {
+            "reference": "organisation_0"
+        },
+        "status": "1"
+    },
+    {
+        "resourceType": "Organization",
+        "identifier": [
+            {
+                "value": "organisation_0",
+                "assigner": "http://demo.dhis2.org"
+            }
+        ],
+        "name": "Sierra Leone",
+        "type": [
+            {
+                "coding": [
+                    {
+                        "system": "urn:oid:2.25.268234768686152474523705575269868869248.1",
+                        "code": "1"
+                    }
+                ]
+            }
+        ],
+        "telecom": [
+        ],
+        "status": "1"
+    }
+]
