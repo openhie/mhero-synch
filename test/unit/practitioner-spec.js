@@ -36,4 +36,24 @@ describe('Practitioner', function () {
             expect(allLocations[0].fullName()).toBe('York CHC-Sittia-Sierra Leone')
         });
     });
+
+    describe('formatForRapidPro', function () {
+        it('formats all practitioners data into the format accepted by rapidpro', function () {
+            var Fixtures = require(__dirname + '/../fixtures/fixtures');
+
+            var allPractitioners = Fixtures.practitioners();
+            var allLocations = Fixtures.locations();
+            var allOrganisations = Fixtures.organisations();
+
+            var mergedPractitioners = Practitioner.merge(allPractitioners, allLocations, allOrganisations);
+
+            var formattedPractioners = Practitioner.formatForRapidPro(mergedPractitioners);
+
+            console.log(formattedPractioners[0])
+            expect(formattedPractioners[0].urns[0]).toBe('tel: null');
+            expect(formattedPractioners.length).toBe(3);
+            expect(formattedPractioners[0].name).toBe('mr bill Traifrop');
+            expect(formattedPractioners[0].groups[0]).toBe('York CHC');
+        });
+    });
 });
