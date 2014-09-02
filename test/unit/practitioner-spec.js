@@ -1,9 +1,10 @@
-var Practitioner = require(__dirname + '/../../src/practitioner');
+var Practitioner = require(__dirname + '/../../app/practitioner');
 
 describe('Practitioner', function () {
-    describe('load_all', function () {
+    describe('loadAll', function () {
         it('loads all practitioners from a remote end point', function (done) {
-            Practitioner.load_all().then(function (allPractitioners) {
+            var endPointUrl = 'http://liberia-staging.mhero.org:8984/CSD/csr/dhis2_training_liberia/careServicesRequest/urn:openhie.org:openinfoman-fhir:fhir_practitioner_read/adapter/fhir/Practitioner/_search?name.text=&_format=json&organization.reference=&location.reference='
+            Practitioner.loadAll(endPointUrl).then(function (allPractitioners) {
                 expect(allPractitioners.length).toBe(50);
 
                 var firstPractitioner = allPractitioners[0];
