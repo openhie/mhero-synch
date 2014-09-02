@@ -3,3 +3,4 @@ mhero-synch.iml
 *.swp
 node_modules
 reports
+config/hero-config.json
