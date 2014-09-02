@@ -35,17 +35,16 @@ Practitioner.loadAll = function (url) {
 };
 
 Practitioner.merge = function (allPractitioners, allLocations, allOrganisations) {
-    var Organisation = require(__dirname + '/organisation');
+    var allObjects = allPractitioners.concat(allLocations).concat(allOrganisations);
 
-    allLocations.forEach(function (location) {
-        location.parent = Organisation.findById(allOrganisations, location.parentId);
-    });
-
-    allPractitioners.forEach(function (practitioner) {
-        var parentLocation = allLocations.filter(function (location) {
-            return location.globalId == practitioner.parentId;
+    function findById(allObjects, globalId) {
+        return allObjects.filter(function (object) {
+            return object.globalId == globalId;
         })[0];
-        practitioner.parent = parentLocation;
+    }
+
+    allObjects.forEach(function (object) {
+        object.parent = findById(allObjects, object.parentId);
     });
 
     return allPractitioners;
