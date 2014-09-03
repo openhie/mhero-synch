@@ -8,7 +8,7 @@ var Organisation = function (item) {
         if(!this.parent) {
             return this.name;
         }
-        return this.name + '-' + this.parent.fullName();
+        return this.parent.fullName() + ' - ' + this.name;
     };
 
     function getParentId() {
