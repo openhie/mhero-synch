@@ -33,7 +33,7 @@ describe('Practitioner', function () {
             expect(mergedPractitioners.length).toBe(3);
             expect(mergedPractitioners[0].parent.globalId).toBe('location_1');
             expect(mergedPractitioners[0].parent.parent.globalId).toBe('organisation_1');
-            expect(allLocations[0].fullName()).toBe('York CHC-Sittia-Sierra Leone')
+            expect(allLocations[0].fullName()).toBe('Sittia-Sierra Leone York CHC')
         });
     });
 
@@ -51,7 +51,7 @@ describe('Practitioner', function () {
             //WIP: Foregoing ommiting contacts without phone numbers till we get the correct data
             expect(firstRapidProContact.phone).toBe(null);
             expect(firstRapidProContact.name).toBe('mr bill Traifrop');
-            expect(firstRapidProContact.groups[0]).toBe('York CHC-Sittia-Sierra Leone');
+            expect(firstRapidProContact.groups[0]).toBe('Sittia-Sierra Leone York CHC');
         });
     });
 });
