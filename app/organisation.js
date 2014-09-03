@@ -5,10 +5,17 @@ var Organisation = function (item) {
     this.parentId = getParentId();
 
     this.fullName = function () {
-        if(!this.parent) {
+        if (!this.parent) {
             return this.name;
         }
         return this.parent.fullName() + ' - ' + this.name;
+    };
+
+    this.groups = function () {
+        if (!this.parent) {
+            return [this.fullName()];
+        }
+        return [this.fullName()].concat(this.parent.groups());
     };
 
     function getParentId() {

@@ -51,7 +51,10 @@ describe('Practitioner', function () {
             //WIP: Foregoing ommiting contacts without phone numbers till we get the correct data
             expect(firstRapidProContact.phone).toBe(null);
             expect(firstRapidProContact.name).toBe('mr bill Traifrop');
+            expect(firstRapidProContact.groups.length).toBe(3);
             expect(firstRapidProContact.groups[0]).toBe('Sierra Leone - Sittia - York CHC');
+            expect(firstRapidProContact.groups[1]).toBe('Sierra Leone - Sittia');
+            expect(firstRapidProContact.groups[2]).toBe('Sierra Leone');
         });
     });
 });

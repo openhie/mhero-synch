@@ -10,7 +10,7 @@ var Practitioner = function (item) {
     this.toRapidProContact = function () {
         var contact = { name: this.familyName + ' ' + this.givenName };
         if (this.parent) {
-            contact.groups = [this.parent.fullName()]
+            contact.groups = this.parent.groups();
         }
         contact.phone = this.phone;
         return contact;

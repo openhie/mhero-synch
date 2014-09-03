@@ -7,6 +7,10 @@ var Location = function (item) {
     this.fullName = function () {
         return this.parent.fullName() + ' - ' + this.name;
     };
+
+    this.groups = function () {
+        return [this.fullName()].concat(this.parent.groups());
+    };
 };
 
 Location.loadAll = function (url) {
