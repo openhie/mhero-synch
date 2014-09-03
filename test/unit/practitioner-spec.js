@@ -1,11 +1,12 @@
 var Practitioner = require(__dirname + '/../../app/practitioner');
+var config = require(__dirname + '/../../app/config');
 
 describe('Practitioner', function () {
     var Fixtures = require(__dirname + '/../fixtures/fixtures');
 
     describe('loadAll', function () {
         it('loads all practitioners from a remote end point', function (done) {
-            var endPointUrl = 'http://liberia-staging.mhero.org:8984/CSD/csr/merged_sierra_leone/careServicesRequest/urn:openhie.org:openinfoman-fhir:fhir_practitioner_read/adapter/fhir/Practitioner/_history?_format=json&_since=1900-01-01'
+            var endPointUrl = config.practitionerEndPoint;
             Practitioner.loadAll(endPointUrl).then(function (allPractitioners) {
                 expect(allPractitioners.length).toBe(1038);
 
