@@ -4,3 +4,4 @@ mhero-synch.iml
 node_modules
 reports
 config/hero-config.json
+run/*

@@ -1,10 +1,15 @@
 #!/usr/bin/env node
 
 // Build the post string from an object
+//var post_data = JSON.stringify({
+//    "phone": "+250788123122",
+//    "name": "Ben Haggerty Jr.",
+//    "groups": ["cool", "fancy"]
+//});
 var post_data = JSON.stringify({
-    "phone": "+250788123123",
-    "name": "Ben Haggerty",
-    "groups": ["cool", "fancy"]
+    "name": "Triolapr Clihou",
+    "groups": ["Benguima Grassfield MCHP-Rural Western Area-Western Area-Sierra Leone"],
+    "phone": "+250788100006"
 });
 
 
