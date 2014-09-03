@@ -18,10 +18,10 @@ var Practitioner = function (item) {
 
     function getParentId() {
         var location = jsonContent.location;
-        if (!location || location.length == 0) {
-            return null;
+        if (location && location.length > 0) {
+            return location[0].reference;
         }
-        return location[0].reference;
+        return jsonContent.organization.reference;
     }
 
     function getContact(jsonContent, contactField) {
@@ -55,6 +55,12 @@ Practitioner.merge = function (allPractitioners, allLocations, allOrganisations)
 
     allObjects.forEach(function (object) {
         object.parent = findById(allObjects, object.parentId);
+    });
+
+    allLocations.forEach(function (location) {
+        if(!location.parent) {
+            throw '[DATA ERROR] Location must have a parent, but this does not: ' + location.globalId;
+        }
     });
 
     return allPractitioners;
