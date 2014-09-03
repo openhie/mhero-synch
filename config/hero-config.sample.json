@@ -1,3 +1,10 @@
 {
-    "rapidProAuthorisationToken": "4cddad6e342c1488d287e485295cbe6754be1dee"
+    "port": 8082,
+
+    "practitionerEndPoint": "http://liberia-staging.mhero.org:8984/CSD/csr/merged_sierra_leone/careServicesRequest/urn:openhie.org:openinfoman-fhir:fhir_practitioner_read/adapter/fhir/Practitioner/_search?_format=json&name.text=&organization.reference=&location.reference=",
+    "locationEndPoint": "http://liberia-staging.mhero.org:8984/CSD/csr/merged_sierra_leone/careServicesRequest/urn:openhie.org:openinfoman-fhir:fhir_location_read/adapter/fhir/Location/_search?_format=json&name=&managingOrganization.reference=",
+    "organisationEndPoint": "http://liberia-staging.mhero.org:8984/CSD/csr/merged_sierra_leone/careServicesRequest/urn:openhie.org:openinfoman-fhir:fhir_organization_read/adapter/fhir/Organization/_search?_format=json&name=&partOf.reference=",
+
+    "rapidProContactEndPoint": "https://rapidpro.io/api/v1/contacts.json",
+    "rapidProAuthorisationToken": "YOUR_RAPID_PRO_AUTH_TOKEN"
 }

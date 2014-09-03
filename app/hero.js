@@ -7,6 +7,8 @@ var Organisation = require(__dirname + '/organisation');
 var runDir = __dirname + '/../run';
 var cacheFile = runDir + '/contacts.json';
 
+var config = require(__dirname + '/config.js');
+
 function writeToCache(contacts) {
     fs.writeFileSync(cacheFile, JSON.stringify(contacts));
 }
@@ -18,7 +20,6 @@ function readFromCache() {
 
 function postContactToRapidPro(rapidProContactEndPoint, contact) {
     var request = require('request');
-    var config = require(__dirname + '/config.js');
     request.post({
         headers: {
             'content-type': 'application/json',
@@ -30,7 +31,7 @@ function postContactToRapidPro(rapidProContactEndPoint, contact) {
         try {
             JSON.parse(body);
             process.stdout.write('.');
-        } catch(error) {
+        } catch (error) {
             process.stdout.write('E');
             fs.appendFileSync(runDir + '/push.log', '============\n');
             fs.appendFileSync(runDir + '/push.log', '--> pushing data\n');
@@ -41,11 +42,11 @@ function postContactToRapidPro(rapidProContactEndPoint, contact) {
     });
 }
 
-var Hero = function (options) {
+var Hero = function () {
     this.pull = function () {
-        var practitionerEndPoint = options.practitionerEndPoint;
-        var locationEndPoint = options.locationEndPoint;
-        var organisationEndPoint = options.organisationEndPoint;
+        var practitionerEndPoint = config.practitionerEndPoint;
+        var locationEndPoint = config.locationEndPoint;
+        var organisationEndPoint = config.organisationEndPoint;
 
         return Practitioner.loadAll(practitionerEndPoint).then(function (allPractitioners) {
             return Location.loadAll(locationEndPoint).then(function (allLocations) {
@@ -61,7 +62,7 @@ var Hero = function (options) {
     };
 
     this.push = function () {
-        var rapidProContactEndPoint = options.rapidProContactEndPoint;
+        var rapidProContactEndPoint = config.rapidProContactEndPoint;
         var allContacts = readFromCache();
         allContacts.forEach(function (contact, index) {
             // FIXME: don't do this once we can get number from HWR

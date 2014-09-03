@@ -2,7 +2,8 @@
 
 var http = require('http');
 
-var port = 8082;
+var config = require(__dirname + '/../app/config');
+var port = config.port;
 
 function execute(scriptName) {
     console.log('start execution: ' + scriptName);
