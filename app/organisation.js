@@ -8,7 +8,7 @@ var Organisation = function (item) {
         if (!this.parent) {
             return this.name;
         }
-        return this.parent.fullName() + ' - ' + this.name;
+        return this.parent.fullName() + ', ' + this.name;
     };
 
     this.groups = function () {

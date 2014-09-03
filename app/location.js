@@ -5,7 +5,7 @@ var Location = function (item) {
     this.parentId = jsonContent.managingOrganization.reference;
 
     this.fullName = function () {
-        return this.parent.fullName() + ' - ' + this.name;
+        return this.parent.fullName() + ', ' + this.name;
     };
 
     this.groups = function () {
