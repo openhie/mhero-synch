@@ -1,5 +1,6 @@
 var Practitioner = require(__dirname + '/../../app/practitioner');
-var config = require(__dirname + '/../../app/config');
+var Config = require(__dirname + '/../../app/config');
+var config = new Config('dev');
 
 describe('Practitioner', function () {
     var Fixtures = require(__dirname + '/../fixtures/fixtures');
@@ -18,6 +19,13 @@ describe('Practitioner', function () {
                 expect(firstPractitioner.email).toBe(null);
                 expect(firstPractitioner.phone).toBe(null);
 
+                var lastPractitioner = allPractitioners[allPractitioners.length - 1];
+                expect(lastPractitioner.globalId).toBe('urn:dhis.org:sierra-leone-demo:csd:provider:o3wC90im0LD');
+                expect(lastPractitioner.phone).toBe('12456789');
+
+                done();
+            }).catch(function (error) {
+                expect(error).toBe(null);
                 done();
             });
         });

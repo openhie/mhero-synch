@@ -3,5 +3,6 @@ mhero-synch.iml
 *.swp
 node_modules
 reports
-config/hero-config.json
+config/hero-config.staging.json
+config/hero-config.dev.json
 run/*

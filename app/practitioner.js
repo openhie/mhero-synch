@@ -2,8 +2,8 @@ var Practitioner = function (item) {
     var jsonContent = JSON.parse(item['atom:content']['#']);
     this.globalId = jsonContent.identifier[0].value;
     this.parentId = getParentId();
-    this.familyName = jsonContent.name.family[0];
-    this.givenName = jsonContent.name.given[0];
+    this.familyName = getName('family');
+    this.givenName = getName('given');
     this.email = getContact(jsonContent, 'EMAIL');
     this.phone = getContact(jsonContent, 'BP');
 
@@ -16,6 +16,14 @@ var Practitioner = function (item) {
         return contact;
     };
 
+    function getName(postfix) {
+        var name = jsonContent.name[postfix];
+        if(!name || name.length ==0) {
+            return null;
+        }
+        return name[0];
+    }
+
     function getParentId() {
         var location = jsonContent.location;
         if (location && location.length > 0) {
@@ -26,7 +34,7 @@ var Practitioner = function (item) {
 
     function getContact(jsonContent, contactField) {
         var contact = jsonContent.telecom;
-        if (contact.length == 0) {
+        if (!contact || contact.length == 0) {
             return null;
         }
 
@@ -37,9 +45,9 @@ var Practitioner = function (item) {
     }
 };
 
-var FeedReader = require(__dirname + '/feed-reader');
 
 Practitioner.loadAll = function (url) {
+    var FeedReader = require(__dirname + '/feed-reader');
     var feedReader = new FeedReader(Practitioner, url);
     return feedReader.loadAll();
 };
@@ -58,7 +66,7 @@ Practitioner.merge = function (allPractitioners, allLocations, allOrganisations)
     });
 
     allLocations.forEach(function (location) {
-        if(!location.parent) {
+        if (!location.parent) {
             throw '[DATA ERROR] Location must have a parent, but this does not: ' + location.globalId;
         }
     });

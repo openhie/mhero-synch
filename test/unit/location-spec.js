@@ -1,5 +1,6 @@
 var Location = require(__dirname + '/../../app/location');
-var config = require(__dirname + '/../../app/config');
+var Config = require(__dirname + '/../../app/config');
+var config = new Config('dev');
 
 describe('Location', function () {
     describe('loadAll', function () {
@@ -13,6 +14,9 @@ describe('Location', function () {
                 expect(firstLocation.name).toBe('York CHC');
                 expect(firstLocation.parentId).toBe('urn:dhis.org:sierra-leone-demo:csd:organization:qtr8GGlm4gg');
 
+                done();
+            }).catch(function (error) {
+                expect(error).toBe(null);
                 done();
             });
         });

@@ -7,7 +7,8 @@ var Organisation = require(__dirname + '/organisation');
 var runDir = __dirname + '/../run';
 var cacheFile = runDir + '/contacts.json';
 
-var config = require(__dirname + '/config.js');
+var Config = require(__dirname + '/config');
+var config = new Config();
 
 function writeToCache(contacts) {
     fs.writeFileSync(cacheFile, JSON.stringify(contacts));

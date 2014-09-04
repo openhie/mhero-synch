@@ -11,8 +11,9 @@ var FeedReader = function(modelClass, endPointUrl) {
         var feedParser = new FeedParser([]);
 
         req.on('error', function (error) {
-            throw error;
+            deferred.reject(error);
         });
+
         req.on('response', function (res) {
             if (res.statusCode != 200) {
                 return this.emit('error', new Error('Bad status code'));
@@ -23,7 +24,7 @@ var FeedReader = function(modelClass, endPointUrl) {
         var allPractitioners = [];
 
         feedParser.on('error', function (error) {
-            throw error;
+            deferred.reject(error);
         });
 
         feedParser.on('readable', function () {
