@@ -19,17 +19,16 @@ function readFromCache() {
     return JSON.parse(rawJson);
 }
 
-function postContactToRapidPro(rapidProContactEndPoint, contact) {
+function postContactToRapidPro(rapidProContactEndPoint, contact, logFile) {
     var request = require('request');
 
     function logFailure(body) {
         process.stdout.write('E');
-        fs.appendFileSync(runDir + '/push.log',
-                '============\n'
-                + '--> pushing data\n'
-                + JSON.stringify(contact) + '\n'
-                + '<-- getting response\n'
-                + body + '\n');
+        logFile.write('============\n'
+            + '--> pushing data\n'
+            + JSON.stringify(contact) + '\n'
+            + '<-- getting response\n'
+            + body + '\n');
     }
 
     request.post({
@@ -75,8 +74,11 @@ var Hero = function () {
     this.push = function () {
         var rapidProContactEndPoint = config.rapidProContactEndPoint;
         var allContacts = readFromCache();
+
+        var logFile = fs.createWriteStream(runDir + '/push.log', {flags: 'w'});
+
         allContacts.forEach(function (contact) {
-            postContactToRapidPro(rapidProContactEndPoint, contact);
+            postContactToRapidPro(rapidProContactEndPoint, contact, logFile);
         });
     };
 };
