@@ -21,6 +21,16 @@ function readFromCache() {
 
 function postContactToRapidPro(rapidProContactEndPoint, contact) {
     var request = require('request');
+
+    function logFailure(body) {
+        process.stdout.write('E');
+        fs.appendFileSync(runDir + '/push.log', '============\n');
+        fs.appendFileSync(runDir + '/push.log', '--> pushing data\n');
+        fs.appendFileSync(runDir + '/push.log', JSON.stringify(contact) + '\n');
+        fs.appendFileSync(runDir + '/push.log', '<-- getting response\n');
+        fs.appendFileSync(runDir + '/push.log', body + '\n');
+    }
+
     request.post({
         headers: {
             'content-type': 'application/json',
@@ -30,15 +40,14 @@ function postContactToRapidPro(rapidProContactEndPoint, contact) {
         body: JSON.stringify(contact)
     }, function (error, response, body) {
         try {
-            JSON.parse(body);
-            process.stdout.write('.');
+            var responseContact = JSON.parse(body);
+            if(responseContact.phone) {
+                process.stdout.write('.');
+            } else {
+                logFailure(body);
+            }
         } catch (error) {
-            process.stdout.write('E');
-            fs.appendFileSync(runDir + '/push.log', '============\n');
-            fs.appendFileSync(runDir + '/push.log', '--> pushing data\n');
-            fs.appendFileSync(runDir + '/push.log', JSON.stringify(contact) + '\n');
-            fs.appendFileSync(runDir + '/push.log', '<-- getting response\n');
-            fs.appendFileSync(runDir + '/push.log', body + '\n');
+            logFailure(body);
         }
     });
 }
@@ -65,19 +74,10 @@ var Hero = function () {
     this.push = function () {
         var rapidProContactEndPoint = config.rapidProContactEndPoint;
         var allContacts = readFromCache();
-        allContacts.forEach(function (contact, index) {
-            // FIXME: don't do this once we can get number from HWR
-            contact.phone = '+2507881' + paddy(index, 5);
+        allContacts.forEach(function (contact) {
             postContactToRapidPro(rapidProContactEndPoint, contact);
         });
     };
 };
-
-// FIXME: only for test!!!
-function paddy(n, p, c) {
-    var pad_char = typeof c !== 'undefined' ? c : '0';
-    var pad = new Array(1 + p).join(pad_char);
-    return (pad + n).slice(-pad.length);
-}
 
 module.exports = Hero;
