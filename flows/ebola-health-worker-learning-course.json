@@ -1,0 +1,810 @@
+{
+  "version": 1, 
+  "flows": [
+    {
+      "definition": {
+        "entry": "1accc8c1-d6c2-4665-920d-e4a11a380865", 
+        "rule_sets": [
+          {
+            "uuid": "5885d9f7-d8dd-4457-aa71-c7779b9818f1", 
+            "webhook_action": null, 
+            "rules": [
+              {
+                "test": {
+                  "test": "a 12hours ", 
+                  "type": "contains_any"
+                }, 
+                "category": "12 hours - 2 days", 
+                "destination": "ee3c43e0-99bb-4184-882b-fcfc88950133", 
+                "uuid": "49d2e645-672c-4469-9e70-80440872a7bd"
+              }, 
+              {
+                "test": {
+                  "test": "b 2-21days", 
+                  "type": "contains_any"
+                }, 
+                "category": "2 - 21 days", 
+                "destination": "1585123e-9483-46a5-9855-bc583cdee0c0", 
+                "uuid": "ff8b3749-bd2a-42b2-b9a1-2ea45db72e7e"
+              }, 
+              {
+                "test": {
+                  "test": "c 2-10days", 
+                  "type": "contains_any"
+                }, 
+                "category": "2 - 10 days", 
+                "destination": "ee3c43e0-99bb-4184-882b-fcfc88950133", 
+                "uuid": "80de9128-85fb-4af6-a0bf-cfe485b9de0c"
+              }, 
+              {
+                "test": {
+                  "test": "d 5-21days", 
+                  "type": "contains_any"
+                }, 
+                "category": "5 - 21 days", 
+                "destination": "ee3c43e0-99bb-4184-882b-fcfc88950133", 
+                "uuid": "28d4ba36-f18a-4512-bbda-1778a9dfa8f6"
+              }, 
+              {
+                "test": {
+                  "test": "true", 
+                  "type": "true"
+                }, 
+                "category": "Other", 
+                "destination": "ee3c43e0-99bb-4184-882b-fcfc88950133", 
+                "uuid": "4d38425b-4c13-4b37-b522-f61d4e7d438c"
+              }
+            ], 
+            "webhook": null, 
+            "label": "windows period", 
+            "operand": "@step.value", 
+            "finished_key": null, 
+            "y": 1767, 
+            "x": 305
+          }, 
+          {
+            "uuid": "53eb69a5-696c-4365-babe-4d68fe006038", 
+            "webhook_action": null, 
+            "rules": [
+              {
+                "test": {
+                  "test": "yes y ye yi", 
+                  "type": "contains_any"
+                }, 
+                "category": "Yes", 
+                "destination": "94ce8127-79dd-4f6d-96da-ab7ef530a7a8", 
+                "uuid": "c5beb5ef-4c7e-41e8-a22e-2ee8a98d76ab"
+              }, 
+              {
+                "test": {
+                  "test": "no nah nope", 
+                  "type": "contains_any"
+                }, 
+                "category": "No", 
+                "destination": null, 
+                "uuid": "8fd77fa1-f2c5-40e7-a5a5-f0084400f630"
+              }, 
+              {
+                "test": {
+                  "test": "true", 
+                  "type": "true"
+                }, 
+                "category": "Other", 
+                "destination": "10fe8849-bf9e-4b4d-85c3-476033c40d0c", 
+                "uuid": "b6d670af-2190-4bfc-b49b-c2bb34728561"
+              }
+            ], 
+            "webhook": null, 
+            "label": "More Infomation", 
+            "operand": "@step.value", 
+            "finished_key": null, 
+            "y": 7118, 
+            "x": 285
+          }, 
+          {
+            "uuid": "f7fb2d03-1f7b-48a5-8396-d7f587709fd5", 
+            "webhook_action": null, 
+            "rules": [
+              {
+                "test": {
+                  "test": "true", 
+                  "type": "true"
+                }, 
+                "category": "All Responses", 
+                "destination": "0d966b61-4fd6-4e11-a6dd-503916188bd2", 
+                "uuid": "2a818036-cfb0-4bfe-9531-9ec50b5e7dc8"
+              }
+            ], 
+            "webhook": null, 
+            "label": "Case Study 50 year Old", 
+            "operand": "@step.value", 
+            "finished_key": null, 
+            "y": 6556, 
+            "x": 845
+          }, 
+          {
+            "uuid": "5bcb1ff2-5dad-446e-a4d2-19d8c8a52900", 
+            "webhook_action": null, 
+            "rules": [
+              {
+                "test": {
+                  "test": "true", 
+                  "type": "true"
+                }, 
+                "category": "All Responses", 
+                "destination": "9ba0c7a4-33c0-4f9b-8980-c88f7f5d24d7", 
+                "uuid": "0edf1c14-de5f-4302-a682-6a7fe0a288da"
+              }
+            ], 
+            "webhook": null, 
+            "label": "Next Step 5 year Old", 
+            "operand": "@step.value", 
+            "finished_key": null, 
+            "y": 6511, 
+            "x": 350
+          }, 
+          {
+            "uuid": "ab5fd0fc-d2e6-421f-9414-d2ab73d1357d", 
+            "webhook_action": null, 
+            "rules": [
+              {
+                "test": {
+                  "test": "true", 
+                  "type": "true"
+                }, 
+                "category": "All Responses", 
+                "destination": "9a1e83f2-085e-4446-bf52-f75172c70ebc", 
+                "uuid": "c16d29db-855d-4936-b277-d2d4c9db142a"
+              }
+            ], 
+            "webhook": null, 
+            "label": "Appropriate Actions", 
+            "operand": "@step.value", 
+            "finished_key": null, 
+            "y": 5899, 
+            "x": 350
+          }, 
+          {
+            "uuid": "347c0bd0-ab1a-47d1-908b-98550d98c9d9", 
+            "webhook_action": null, 
+            "rules": [
+              {
+                "test": {
+                  "test": "true", 
+                  "type": "true"
+                }, 
+                "category": "All Responses", 
+                "destination": "b31b146c-86ae-43a3-bd04-d1cf858335fd", 
+                "uuid": "c4326584-ebd4-448c-9fd7-529c78a3c76f"
+              }
+            ], 
+            "webhook": null, 
+            "label": "Controlled Movement", 
+            "operand": "@step.value", 
+            "finished_key": null, 
+            "y": 5430, 
+            "x": 782
+          }, 
+          {
+            "uuid": "6d0bf736-b7f5-444b-b3bb-cebf2836e8c8", 
+            "webhook_action": null, 
+            "rules": [
+              {
+                "test": {
+                  "test": "true", 
+                  "type": "true"
+                }, 
+                "category": "All Responses", 
+                "destination": "e82c1a4f-3d51-4284-bdf5-cc73d6d3b8db", 
+                "uuid": "c5716432-4bd6-4b81-9429-c1e7cecb1187"
+              }
+            ], 
+            "webhook": null, 
+            "label": "Conditional Release", 
+            "operand": "@step.value", 
+            "finished_key": null, 
+            "y": 4945, 
+            "x": 780
+          }, 
+          {
+            "uuid": "ee10b6ea-b09a-4d1b-84b7-ea679404591b", 
+            "webhook_action": null, 
+            "rules": [
+              {
+                "test": {
+                  "test": "1 fluids 1)fluids 1fluids 1)", 
+                  "type": "contains_any"
+                }, 
+                "category": "fluids", 
+                "destination": "7e8e8848-3629-422a-84ec-3319eaced7f1", 
+                "uuid": "d0f3de86-e016-42a9-9253-601391597759"
+              }, 
+              {
+                "test": {
+                  "test": "2 antibiotics 2)antibiotics 2antibiotics 2)", 
+                  "type": "contains_any"
+                }, 
+                "category": "antibiotics", 
+                "destination": "48ccf83d-80fb-4cdb-9842-53dc58173049", 
+                "uuid": "643a2fb6-6be2-42d4-af9f-4503b5ceef94"
+              }, 
+              {
+                "test": {
+                  "test": "3 antivirals 3)antivirals 3antivirals 3)", 
+                  "type": "contains_any"
+                }, 
+                "category": "antivirals", 
+                "destination": "48ccf83d-80fb-4cdb-9842-53dc58173049", 
+                "uuid": "f7f83c1b-4e7d-4db3-aba5-cc2c62d832d9"
+              }, 
+              {
+                "test": {
+                  "test": "4 nti-pyretics/Anti-fever medications 4nti-pyretics/Anti-fever medications 4)nti-pyretics/Anti-fever medications 4)", 
+                  "type": "contains_any"
+                }, 
+                "category": "nti-pyretics/Anti-fever medications", 
+                "destination": "48ccf83d-80fb-4cdb-9842-53dc58173049", 
+                "uuid": "4e39152e-1f85-41ae-92cd-658781422acb"
+              }, 
+              {
+                "test": {
+                  "test": "5 None no nocure", 
+                  "type": "contains_any"
+                }, 
+                "category": "No Cure", 
+                "destination": "48ccf83d-80fb-4cdb-9842-53dc58173049", 
+                "uuid": "f09497a4-55c1-4362-9e73-b9af4ad0fa7e"
+              }, 
+              {
+                "test": {
+                  "test": "true", 
+                  "type": "true"
+                }, 
+                "category": "Other", 
+                "destination": "48ccf83d-80fb-4cdb-9842-53dc58173049", 
+                "uuid": "1045f1b8-e636-4753-80e0-0251b0db84e1"
+              }
+            ], 
+            "webhook": null, 
+            "label": "Treatment", 
+            "operand": "@step.value", 
+            "finished_key": null, 
+            "y": 3816, 
+            "x": 130
+          }, 
+          {
+            "uuid": "4a566062-9830-4888-9505-fcb39e82b9cc", 
+            "webhook_action": null, 
+            "rules": [
+              {
+                "test": {
+                  "test": "1 food 1food 1) 1)food", 
+                  "type": "contains_any"
+                }, 
+                "category": "food", 
+                "destination": "e0992957-4110-492a-88c5-511f9f28ec31", 
+                "uuid": "2f3200fc-8800-49c3-b8d4-94227dd94204"
+              }, 
+              {
+                "test": {
+                  "test": "2 water 2water 2) 2)water", 
+                  "type": "contains_any"
+                }, 
+                "category": "water", 
+                "destination": "e0992957-4110-492a-88c5-511f9f28ec31", 
+                "uuid": "f338f7bd-9431-4278-a052-67063a90a547"
+              }, 
+              {
+                "test": {
+                  "test": "3 body fluid fluids3) 3)body ", 
+                  "type": "contains_any"
+                }, 
+                "category": "body fluids", 
+                "destination": "80859155-1529-48ee-be55-a38962e81c2b", 
+                "uuid": "dcba54d5-5e13-45a8-9842-a6d83cae07d9"
+              }, 
+              {
+                "test": {
+                  "test": "4 respiratory 4) 4)respiratory ", 
+                  "type": "contains_any"
+                }, 
+                "category": "respiratory droplets", 
+                "destination": "e0992957-4110-492a-88c5-511f9f28ec31", 
+                "uuid": "292bd170-c858-4a38-bab2-d0e783d5b20f"
+              }, 
+              {
+                "test": {
+                  "test": "true", 
+                  "type": "true"
+                }, 
+                "category": "Other", 
+                "destination": "e0992957-4110-492a-88c5-511f9f28ec31", 
+                "uuid": "e2355a8d-a71b-4040-9faa-7ea064a78324"
+              }
+            ], 
+            "webhook": null, 
+            "label": "Transmission", 
+            "operand": "@step.value", 
+            "finished_key": null, 
+            "y": 948, 
+            "x": 242
+          }, 
+          {
+            "uuid": "a0ae5531-a37f-422d-8682-d46e925b66fa", 
+            "webhook_action": null, 
+            "rules": [
+              {
+                "test": {
+                  "test": "2 virus 2virus 2)virus 2)", 
+                  "type": "contains_any"
+                }, 
+                "category": "virus", 
+                "destination": "bcb3a597-a6c4-4597-88b5-bf6db5b08c37", 
+                "uuid": "882b86b7-1aaa-496a-9809-912b5015656a"
+              }, 
+              {
+                "test": {
+                  "test": "1 bacteria 1bacteria 1)bacteria 1)", 
+                  "type": "contains_any"
+                }, 
+                "category": "bacteria", 
+                "destination": "935279e7-7e3c-47d2-b30f-98fc4806e283", 
+                "uuid": "d18a2cf0-6295-4d34-872b-97ed34bb93d1"
+              }, 
+              {
+                "test": {
+                  "test": "3 toxin 3toxin 3)toxin 3)", 
+                  "type": "contains_any"
+                }, 
+                "category": "toxin", 
+                "destination": "935279e7-7e3c-47d2-b30f-98fc4806e283", 
+                "uuid": "011a5d85-6e43-4296-96ce-7ea269846382"
+              }, 
+              {
+                "test": {
+                  "test": "4 parasite 4parasite 4)", 
+                  "type": "contains_any"
+                }, 
+                "category": "parasite", 
+                "destination": "935279e7-7e3c-47d2-b30f-98fc4806e283", 
+                "uuid": "f3ec69f9-ab83-4504-afaf-c318406401fd"
+              }, 
+              {
+                "test": {
+                  "test": "true", 
+                  "type": "true"
+                }, 
+                "category": "Other", 
+                "destination": "935279e7-7e3c-47d2-b30f-98fc4806e283", 
+                "uuid": "9f8b2214-bd2d-4352-8198-3452356261ef"
+              }
+            ], 
+            "webhook": null, 
+            "label": "agent", 
+            "operand": "@step.value", 
+            "finished_key": null, 
+            "y": 405, 
+            "x": 294
+          }, 
+          {
+            "uuid": "1361d728-3774-4cdd-b721-16b21b661676", 
+            "webhook_action": null, 
+            "rules": [
+              {
+                "test": {
+                  "test": "true", 
+                  "type": "true"
+                }, 
+                "category": "All Responses", 
+                "destination": "2434a057-6253-42b7-aca0-7708a821879e", 
+                "uuid": "ad0cbf72-07dc-4d1f-91eb-b72640da28ea"
+              }
+            ], 
+            "webhook": null, 
+            "label": "Removing Protective Equipment", 
+            "operand": "@step.value", 
+            "finished_key": null, 
+            "y": 4368, 
+            "x": 1066
+          }, 
+          {
+            "uuid": "44c8a3c0-9d04-49cb-87c7-1e3410349032", 
+            "webhook_action": null, 
+            "rules": [
+              {
+                "test": {
+                  "test": "true", 
+                  "type": "true"
+                }, 
+                "category": "All Responses", 
+                "destination": "d0048527-e742-4606-9196-a877f1182fe0", 
+                "uuid": "d4da8e67-f3a3-4ea0-8708-52f11910707b"
+              }
+            ], 
+            "webhook": null, 
+            "label": "Cause of health worker infection", 
+            "operand": "@step.value", 
+            "finished_key": null, 
+            "y": 4946, 
+            "x": 223
+          }, 
+          {
+            "uuid": "0af81368-e244-4d73-8832-f3f1f8d64968", 
+            "webhook_action": null, 
+            "rules": [
+              {
+                "test": {
+                  "test": "true", 
+                  "type": "true"
+                }, 
+                "category": "All Responses", 
+                "destination": "a8d60f33-fb64-4c0c-9540-a436cd2070b4", 
+                "uuid": "ebcddb86-86cf-4165-99d5-2c9a365e1eda"
+              }
+            ], 
+            "webhook": null, 
+            "label": "Ebola Case", 
+            "operand": "@step.value", 
+            "finished_key": null, 
+            "y": 3045, 
+            "x": 353
+          }
+        ], 
+        "action_sets": [
+          {
+            "y": 7231, 
+            "x": 221, 
+            "destination": null, 
+            "uuid": "94ce8127-79dd-4f6d-96da-ab7ef530a7a8", 
+            "actions": [
+              {
+                "type": "add_group", 
+                "groups": [
+                  {
+                    "name": "Ebola Info Group", 
+                    "id": 1290
+                  }
+                ]
+              }, 
+              {
+                "field": "campaign_date", 
+                "type": "save", 
+                "value": "@date.now ", 
+                "label": "campaign_date"
+              }
+            ]
+          }, 
+          {
+            "y": 7075, 
+            "x": 737, 
+            "destination": "53eb69a5-696c-4365-babe-4d68fe006038", 
+            "uuid": "10fe8849-bf9e-4b4d-85c3-476033c40d0c", 
+            "actions": [
+              {
+                "msg": "Sorry we didn't get that. Do you want more information on Ebola. Please reply with either 'yes' or 'no'", 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 5163, 
+            "x": 726, 
+            "destination": "347c0bd0-ab1a-47d1-908b-98550d98c9d9", 
+            "uuid": "e82c1a4f-3d51-4284-bdf5-cc73d6d3b8db", 
+            "actions": [
+              {
+                "msg": "Conditional release is Living at usual place of residence wth monitoring by health authorities twice-daily notify authorities if fever or other symptoms develop. Define controlled movement?", 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 5066, 
+            "x": 246, 
+            "destination": "1361d728-3774-4cdd-b721-16b21b661676", 
+            "uuid": "d0048527-e742-4606-9196-a877f1182fe0", 
+            "actions": [
+              {
+                "msg": "Common cause is human error from fatigue, patient load, and stress There's evidence that some workers may'nt have training on properly removing protective gear", 
+                "type": "reply"
+              }, 
+              {
+                "msg": "What is the proper way to remove protective equipment? ", 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 4449, 
+            "x": 1073, 
+            "destination": "6d0bf736-b7f5-444b-b3bb-cebf2836e8c8", 
+            "uuid": "2434a057-6253-42b7-aca0-7708a821879e", 
+            "actions": [
+              {
+                "msg": "Protective equipment should be removed in this order: gloves, goggles, gown, and mask. Gloves first because they are the most contaminated if the equipment", 
+                "type": "reply"
+              }, 
+              {
+                "msg": " Asymptomatic people with high risk exposures may leave facilities if they can commit to conditional release and controlled movement for 21days after last known exposure. Define conditional release?", 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 1378, 
+            "x": 57, 
+            "destination": "5885d9f7-d8dd-4457-aa71-c7779b9818f1", 
+            "uuid": "80859155-1529-48ee-be55-a38962e81c2b", 
+            "actions": [
+              {
+                "msg": "Correct! \nHow soon after infection will a person start 2 have signs & symptoms of Ebola hemorrhagic fever? \na)12hrs-2days b)2-21days c)2-10days d)5 -21days", 
+                "type": "reply"
+              }, 
+              {
+                "field": "q2", 
+                "type": "save", 
+                "value": "Correct", 
+                "label": "q2"
+              }
+            ]
+          }, 
+          {
+            "y": 4340, 
+            "x": 57, 
+            "destination": "44c8a3c0-9d04-49cb-87c7-1e3410349032", 
+            "uuid": "7e8e8848-3629-422a-84ec-3319eaced7f1", 
+            "actions": [
+              {
+                "msg": "Correct! \nIncreased fluids, whether oral or IV, and balancing the patient\u2019s electrolytes are an essential part of Ebola care.", 
+                "type": "reply"
+              }, 
+              {
+                "msg": "The majority of health workers infected by Ebola in the current epidemic have been infected due to?", 
+                "type": "reply"
+              }, 
+              {
+                "field": "q4", 
+                "type": "save", 
+                "value": "Correct", 
+                "label": "q4"
+              }
+            ]
+          }, 
+          {
+            "y": 1429, 
+            "x": 926, 
+            "destination": "5885d9f7-d8dd-4457-aa71-c7779b9818f1", 
+            "uuid": "e0992957-4110-492a-88c5-511f9f28ec31", 
+            "actions": [
+              {
+                "msg": "Incorrect! It is via body fluids of people with Ebola.\nHow soon after infection will a person start 2 have signs & symptoms of Ebola? \na)12hrs-2days b)2-21days c)2-10days d)5 -21days", 
+                "type": "reply"
+              }, 
+              {
+                "field": "q2", 
+                "type": "save", 
+                "value": "Wrong", 
+                "label": "q2"
+              }
+            ]
+          }, 
+          {
+            "y": 6778, 
+            "x": 295, 
+            "destination": "53eb69a5-696c-4365-babe-4d68fe006038", 
+            "uuid": "0d966b61-4fd6-4e11-a6dd-503916188bd2", 
+            "actions": [
+              {
+                "msg": "He does not fit the criteria for a probable Ebola case Diagnose and treat his illness. Education on Ebola risk factors are important steps in stopping Ebola", 
+                "type": "reply"
+              }, 
+              {
+                "msg": "Thank you for participating in the quiz. Do you want detailed information on Ebola Care? Please reply with either yes or no", 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 2315, 
+            "x": 914, 
+            "destination": "0af81368-e244-4d73-8832-f3f1f8d64968", 
+            "uuid": "ee3c43e0-99bb-4184-882b-fcfc88950133", 
+            "actions": [
+              {
+                "msg": "Incorrect!\nSigns and symptoms of Ebola infection usually appear within 2 to 21 days of infection.\nWhat is the definition of a probable Ebola case?", 
+                "type": "reply"
+              }, 
+              {
+                "field": "q3", 
+                "type": "save", 
+                "value": "Wrong", 
+                "label": "q3"
+              }
+            ]
+          }, 
+          {
+            "y": 523, 
+            "x": 822, 
+            "destination": "4a566062-9830-4888-9505-fcb39e82b9cc", 
+            "uuid": "935279e7-7e3c-47d2-b30f-98fc4806e283", 
+            "actions": [
+              {
+                "msg": "Incorrect!\nEbola is a virus that causes hemorrhagic fever.\nHow is Ebola transmitted? \n1) Food 2)Water 3)Body fluids of people with Ebola 4) Respiratory droplets", 
+                "type": "reply"
+              }, 
+              {
+                "field": "q1", 
+                "type": "save", 
+                "value": "Wrong", 
+                "label": "q1"
+              }
+            ]
+          }, 
+          {
+            "y": 5918, 
+            "x": 852, 
+            "destination": "f7fb2d03-1f7b-48a5-8396-d7f587709fd5", 
+            "uuid": "9ba0c7a4-33c0-4f9b-8980-c88f7f5d24d7", 
+            "actions": [
+              {
+                "msg": "Diagnose her as a probable Ebola case and isolate her immediately and provide supportive care. An Ebola case is confirmed only with a positive Ebola lab study.", 
+                "type": "reply"
+              }, 
+              {
+                "msg": "A 50 year old previously well man has had a fever of 40 degrees Celsius, vomiting and diarrhea for the past two days.  He has had no known Ebola contacts. He has heard about the Ebola epidemic in the region and is concerned because he rides the public bus regularly. What would be your next step? ", 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 6010, 
+            "x": 350, 
+            "destination": "5bcb1ff2-5dad-446e-a4d2-19d8c8a52900", 
+            "uuid": "9a1e83f2-085e-4446-bf52-f75172c70ebc", 
+            "actions": [
+              {
+                "msg": "Families should be praised for bringing the members in. reassured that they made the best decision for their loved one and have increased their survival chance", 
+                "type": "reply"
+              }, 
+              {
+                "msg": "A five year old previously well girl is brought to your health facility by her family. She has a fever of 40 degrees Celsius, vomiting and diarrhea.  She attended a wedding two weeks ago and one of the wedding guests was diagnosed with Ebola last week.  What would be your next step? ", 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 5561, 
+            "x": 783, 
+            "destination": "ab5fd0fc-d2e6-421f-9414-d2ab73d1357d", 
+            "uuid": "b31b146c-86ae-43a3-bd04-d1cf858335fd", 
+            "actions": [
+              {
+                "msg": "Controlled movement is no travel by commercial means such as planes, ships, and trains local travel by taxi or bus only in consultation with local authorities", 
+                "type": "reply"
+              }, 
+              {
+                "msg": "Communicating with patients\u2019 families is an essential part of Ebola care. What are the appropriate categories?", 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 4402, 
+            "x": 636, 
+            "destination": "44c8a3c0-9d04-49cb-87c7-1e3410349032", 
+            "uuid": "48ccf83d-80fb-4cdb-9842-53dc58173049", 
+            "actions": [
+              {
+                "msg": "Incorrect!  Increased fluids, whether oral or IV, and balancing the patient\u2019s electrolytes are an essential part of Ebola care.", 
+                "type": "reply"
+              }, 
+              {
+                "msg": "The majority of health workers infected by Ebola in the current epidemic have been infected due to?", 
+                "type": "reply"
+              }, 
+              {
+                "field": "q4", 
+                "type": "save", 
+                "value": "Wrong", 
+                "label": "q4"
+              }
+            ]
+          }, 
+          {
+            "y": 3180, 
+            "x": 353, 
+            "destination": "ee10b6ea-b09a-4d1b-84b7-ea679404591b", 
+            "uuid": "a8d60f33-fb64-4c0c-9540-a436cd2070b4", 
+            "actions": [
+              {
+                "msg": "Under CDC guidelines a case of Ebola is when some1 has a fever beyond 38.6 Celsius, at least 1 other symptom such as vomiting, diarrhea, headache, muscle ache, abdominal pain, or unexplained hemorrhage with direct contact with a known or probable Ebola case.", 
+                "type": "reply"
+              }, 
+              {
+                "msg": "The most important treatment that can be given to a patient with Ebola to help them survive is? 1)Fluids 2)Antibiotics 3)Antivirals 4)Anti-pyretics/Anti-fever medications 5)There is no care that has been found to increase survival of patients with Ebola", 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 2299, 
+            "x": 240, 
+            "destination": "0af81368-e244-4d73-8832-f3f1f8d64968", 
+            "uuid": "1585123e-9483-46a5-9855-bc583cdee0c0", 
+            "actions": [
+              {
+                "msg": "Correct!\nSigns and symptoms of Ebola infection usually appear within 2 to 21 days of infection.\nWhat is the definition of a probable Ebola case?", 
+                "type": "reply"
+              }, 
+              {
+                "field": "q3", 
+                "type": "save", 
+                "value": "Correct", 
+                "label": "q3"
+              }
+            ]
+          }, 
+          {
+            "y": 533, 
+            "x": 93, 
+            "destination": "4a566062-9830-4888-9505-fcb39e82b9cc", 
+            "uuid": "bcb3a597-a6c4-4597-88b5-bf6db5b08c37", 
+            "actions": [
+              {
+                "msg": "Correct!\nEbola is a virus that causes hemorrhagic fever.\nHow is Ebola transmitted? \n1) Food 2) Water 3) Body fluids of people with Ebola 4) Respiratory droplets", 
+                "type": "reply"
+              }, 
+              {
+                "field": "q1", 
+                "type": "save", 
+                "value": "Correct", 
+                "label": "q1"
+              }
+            ]
+          }, 
+          {
+            "y": 0, 
+            "x": 222, 
+            "destination": "a0ae5531-a37f-422d-8682-d46e925b66fa", 
+            "uuid": "1accc8c1-d6c2-4665-920d-e4a11a380865", 
+            "actions": [
+              {
+                "msg": "Hi @contact . Welcome to the Ebola refresher training module. You will be sent 10 questions. Please respond. You will receive your results at the end. Thx MoH.", 
+                "type": "reply"
+              }, 
+              {
+                "msg": "What kind of disease agent causes Ebola? 1)Bacteria 2)Virus 3)Toxin 4)Parasite. Please respond with only the number of the correct answer (ie 2)", 
+                "type": "reply"
+              }
+            ]
+          }
+        ], 
+        "last_saved": "2014-09-03T13:55:15.903640Z", 
+        "metadata": {
+          "notes": [
+            {
+              "body": "i think these are way too long. \n\ni dont think anyone will make it through the entire flow. some of these will be split into at least 12 sms messages.\n\nthere is no standard, reliable behavior for splitting multipart messages. often they will be received by the user out-of-order, which is going to be really confusing for such a long sequence.\n\npeoples phones are going to be buzzing for hours. \n\nimagine if there is a delay on the aggregator or MNO side.. and then a user gets 30 or 40 messages at once!\n\n\na better approach would be to split this up into several flows. and set it up so that participants will be automatically started in a new flow every day for a week\n\n--evan\n", 
+              "x": 1072, 
+              "y": 500, 
+              "title": "too long!"
+            }
+          ]
+        }
+      }, 
+      "id": 1953, 
+      "flow_type": "F", 
+      "name": "Ebola Health Worker Learning Course"
+    }
+  ], 
+  "triggers": [
+    {
+      "flow": {
+        "name": "Ebola Health Worker Learning Course", 
+        "id": 1953
+      }, 
+      "groups": [], 
+      "keyword": "training", 
+      "trigger_type": "K"
+    }
+  ]
+}

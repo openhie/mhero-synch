@@ -77,7 +77,13 @@ var Hero = function () {
 
         var logFile = fs.createWriteStream(runDir + '/push.log', {flags: 'w'});
 
-        allContacts.forEach(function (contact) {
+        var contactsWithPhoneNumber = allContacts.filter(function (contact) {
+            return contact.phone;
+        });
+
+        console.log('Now, pushing ' + contactsWithPhoneNumber.length + ' contacts to RapidPro.');
+
+        contactsWithPhoneNumber.forEach(function (contact) {
             postContactToRapidPro(rapidProContactEndPoint, contact, logFile);
         });
     };

@@ -5,7 +5,12 @@ var Location = function (item) {
     this.parentId = jsonContent.managingOrganization.reference;
 
     this.fullName = function () {
-        return this.parent.fullName() + ', ' + this.name;
+        var fullName = this.parent.fullName() + ', ' + this.name;
+        // FIXME: we shouldn't need this once Evan fixed RapidPro db restriction
+        if (fullName.length > 64) {
+            fullName = fullName.substring(0, 62) + '..';
+        }
+        return fullName;
     };
 
     this.groups = function () {
