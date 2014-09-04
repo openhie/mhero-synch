@@ -12,15 +12,29 @@ var Practitioner = function (item) {
         if (this.parent) {
             contact.groups = this.parent.groups();
         }
-        var phoneNumber = this.phone;
-        if(phoneNumber && phoneNumber.length > 0 && phoneNumber[0] == '0') {
-            var Config = require(__dirname + '/config');
-            var config = new Config();
-            phoneNumber = config.countryCode + phoneNumber.slice(1)
-        }
-        contact.phone = phoneNumber;
+        contact.phone = formalisePhoneNumber(this.phone);
         return contact;
     };
+
+    function formalisePhoneNumber(rawPhoneNumber) {
+        if(!rawPhoneNumber || rawPhoneNumber.length == 0) {
+            return null;
+        }
+
+        var phoneNumber = rawPhoneNumber.split('/')[0].trim();
+        phoneNumber = phoneNumber.replace(/[^\d\+]/g, '');
+
+        if (phoneNumber[0] == '0') {
+            if (phoneNumber[1] == '0') {
+                phoneNumber = '+' + phoneNumber.slice(2)
+            } else {
+                var Config = require(__dirname + '/config');
+                var config = new Config();
+                phoneNumber = config.countryCode + phoneNumber.slice(1)
+            }
+        }
+        return phoneNumber;
+    }
 
     function getName(postfix) {
         var name = jsonContent.name[postfix];

@@ -47,12 +47,12 @@ describe('Practitioner', function () {
     });
 
     describe('formatForRapidPro', function () {
-        it('formats all practitioners data into the format accepted by rapidpro', function () {
-            var allPractitioners = Fixtures.practitioners();
-            var allLocations = Fixtures.locations();
-            var allOrganisations = Fixtures.organisations();
+        var allPractitioners = Fixtures.practitioners();
+        var allLocations = Fixtures.locations();
+        var allOrganisations = Fixtures.organisations();
+        var mergedPractitioners = Practitioner.merge(allPractitioners, allLocations, allOrganisations);
 
-            var mergedPractitioners = Practitioner.merge(allPractitioners, allLocations, allOrganisations);
+        it('formats all practitioners data into the format accepted by rapidpro', function () {
             var rapidProContacts = Practitioner.formatForRapidPro(mergedPractitioners);
 
             expect(rapidProContacts.length).toBe(3);
@@ -63,6 +63,33 @@ describe('Practitioner', function () {
             expect(firstRapidProContact.groups[0]).toBe('Sierra Leone, Sittia, York CHC');
             expect(firstRapidProContact.groups[1]).toBe('Sierra Leone, Sittia');
             expect(firstRapidProContact.groups[2]).toBe('Sierra Leone');
+        });
+
+        it('replaces leading double zeros to plus sign', function () {
+            var practitioner = allPractitioners[0];
+            practitioner.phone = '00231-888-097-810';
+
+            var contact = practitioner.toRapidProContact();
+
+            expect(contact.phone).toBe('+231888097810');
+        });
+
+        it('cuts off phone numbers after slash', function () {
+            var practitioner = allPractitioners[0];
+            practitioner.phone = '+231-773-219-26 / 880-609-979';
+
+            var contact = practitioner.toRapidProContact();
+
+            expect(contact.phone).toBe('+23177321926');
+        });
+
+        it('clears unnecessary characters in phone numbers', function () {
+            var practitioner = allPractitioners[0];
+            practitioner.phone = '(+231) 0886-609-940 ,';
+
+            var contact = practitioner.toRapidProContact();
+
+            expect(contact.phone).toBe('+2310886609940');
         });
     });
 });

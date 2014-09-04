@@ -1,21 +1,21 @@
 #!/usr/bin/env node
 
-// Build the post string from an object
-//var post_data = JSON.stringify({
-//    "phone": "+250788123122",
-//    "name": "Ben Haggerty Jr.",
-//    "groups": ["cool", "fancy"]
-//});
 var post_data = JSON.stringify({
-    "name": "Triolapr Clihou",
-    "groups": ["Benguima Grassfield MCHP-Rural Western Area-Western Area-Sierra Leone"],
-    "phone": "+250788100006"
+    "phone": "(+231) 0886-609-940/0777-209-840",
+    "name": "Ben Haggerty Jr.",
+    "groups": ["cool", "fancy"]
 });
+//var post_data = JSON.stringify({
+//    "name": "Triolapr Clihou",
+//    "groups": ["Benguima Grassfield MCHP-Rural Western Area-Western Area-Sierra Leone"],
+//    "phone": "+250788100006"
+//});
 
 
 // Set up the request
 var request = require('request');
-var config = require(__dirname + '/../app/config.js');
+var Config = require(__dirname + '/../app/config.js');
+var config = new Config();
 request.post({
     headers: {
         'content-type': 'application/json',

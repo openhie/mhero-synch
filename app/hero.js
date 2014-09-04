@@ -41,7 +41,7 @@ function postContactToRapidPro(rapidProContactEndPoint, contact, logFile) {
     }, function (error, response, body) {
         try {
             var responseContact = JSON.parse(body);
-            if (responseContact.phone) {
+            if (responseContact.phone && responseContact.name) {
                 process.stdout.write('.');
             } else {
                 logFailure(body);
