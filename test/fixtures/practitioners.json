@@ -20,6 +20,14 @@
             ]
         },
         "telecom": [
+            {
+                "system": "BP",
+                "value": "0777926824"
+            },
+            {
+                "system": "EMAIL",
+                "value": "govegothompson@rocketmail.com"
+            }
         ],
         "organization": {
             "reference": "urn:dhis.org:sierra-leone-demo:csd:organization:ImspTQPwCqd"

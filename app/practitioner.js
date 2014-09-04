@@ -12,7 +12,13 @@ var Practitioner = function (item) {
         if (this.parent) {
             contact.groups = this.parent.groups();
         }
-        contact.phone = this.phone;
+        var phoneNumber = this.phone;
+        if(phoneNumber && phoneNumber.length > 0 && phoneNumber[0] == '0') {
+            var Config = require(__dirname + '/config');
+            var config = new Config();
+            phoneNumber = config.countryCode + phoneNumber.slice(1)
+        }
+        contact.phone = phoneNumber;
         return contact;
     };
 

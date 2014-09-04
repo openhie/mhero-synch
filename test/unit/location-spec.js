@@ -7,7 +7,7 @@ describe('Location', function () {
         it('loads all locations from a remote end point', function (done) {
             var endPointUrl = config.locationEndPoint;
             Location.loadAll(endPointUrl).then(function (allLocations) {
-                expect(allLocations.length).toBe(1169);
+                expect(allLocations.length).toBe(1171);
 
                 var firstLocation = allLocations[0];
                 expect(firstLocation.globalId).toBe('urn:dhis.org:sierra-leone-demo:csd:facility:xa4F6gesVJm');
