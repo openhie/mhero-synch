@@ -24,11 +24,12 @@ function postContactToRapidPro(rapidProContactEndPoint, contact) {
 
     function logFailure(body) {
         process.stdout.write('E');
-        fs.appendFileSync(runDir + '/push.log', '============\n');
-        fs.appendFileSync(runDir + '/push.log', '--> pushing data\n');
-        fs.appendFileSync(runDir + '/push.log', JSON.stringify(contact) + '\n');
-        fs.appendFileSync(runDir + '/push.log', '<-- getting response\n');
-        fs.appendFileSync(runDir + '/push.log', body + '\n');
+        fs.appendFileSync(runDir + '/push.log',
+                '============\n'
+                + '--> pushing data\n'
+                + JSON.stringify(contact) + '\n'
+                + '<-- getting response\n'
+                + body + '\n');
     }
 
     request.post({
@@ -41,7 +42,7 @@ function postContactToRapidPro(rapidProContactEndPoint, contact) {
     }, function (error, response, body) {
         try {
             var responseContact = JSON.parse(body);
-            if(responseContact.phone) {
+            if (responseContact.phone) {
                 process.stdout.write('.');
             } else {
                 logFailure(body);
