@@ -1,6 +1,16 @@
+var Q = require('q');
+
+// FIXME: environment should be controlled by a global environment variable
+// FIXME: basic authentication should be extracted from config
+var Config = require(__dirname + '/config');
+var config = new Config();
+
+var ValueSet = require(__dirname + '/value-set');
+
 var Practitioner = function (item) {
     var jsonContent = JSON.parse(item['atom:content']['#']);
     this.globalId = jsonContent.identifier[0].value;
+    this.role = jsonContent.role;
     this.parentId = getParentId();
     this.familyName = getName('family');
     this.givenName = getName('given');
@@ -9,6 +19,22 @@ var Practitioner = function (item) {
 
     this.groups = function () {
         return this.parent ? this.parent.groups() : undefined;
+    };
+
+    this.cadres = function () {
+        if (!this.role) {
+            return [];
+        }
+
+        var promises = this.role.map(function (role) {
+            var coding = role.coding[0];
+            return ValueSet.load(config.valueSetEndPoint, coding.system.split(':')[2]).then(function (valueSet) {
+                var concept = valueSet.get(coding.code);
+                return concept.displayName;
+            });
+        });
+
+        return Q.all(promises);
     };
 
     this.fullName = function () {
@@ -31,8 +57,6 @@ var Practitioner = function (item) {
             return '+' + phoneNumber.slice(2);
         }
 
-        var Config = require(__dirname + '/config');
-        var config = new Config();
         return config.countryCode + phoneNumber.slice(1);
     };
 

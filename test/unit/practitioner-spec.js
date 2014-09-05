@@ -18,6 +18,8 @@ describe('Practitioner', function () {
                 expect(firstPractitioner.familyName).toBe('mr bill');
                 expect(firstPractitioner.email).toBe(null);
                 expect(firstPractitioner.phone).toBe(null);
+                expect(firstPractitioner.role.length).toBe(1);
+                expect(firstPractitioner.role[0].coding[0].code).toBe('PHM');
 
                 var lastPractitioner = allPractitioners[allPractitioners.length - 1];
                 expect(lastPractitioner.globalId).toBe('urn:dhis.org:sierra-leone-demo:csd:provider:o3wC90im0LD');
@@ -43,6 +45,28 @@ describe('Practitioner', function () {
             expect(mergedPractitioners[0].parent.globalId).toBe('location_1');
             expect(mergedPractitioners[0].parent.parent.globalId).toBe('organisation_1');
             expect(allLocations[0].fullName()).toBe('Sierra Leone, Sittia, York CHC')
+        });
+    });
+
+    describe('cadres', function () {
+        it('returns all cadres based on roles', function (done) {
+            var allPractitioners = Fixtures.practitioners();
+            var practitioner = allPractitioners[0];
+            practitioner.role = [
+                {
+                    "coding": [
+                        { "system": "urn:oid:2.25.268234768686152474523705575269868869248.2", "code": "sVu7XCJUKNu" }
+                    ]
+                }
+            ];
+
+            practitioner.cadres().then(function (cadres) {
+                expect(cadres.length).toBe(1);
+                expect(cadres[0]).toBe('Ebola Data entry');
+                done();
+            }).catch(function (error) {
+                expect(error).toBe(null);
+            });
         });
     });
 

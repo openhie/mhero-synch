@@ -3,6 +3,8 @@
 
     "countryCode": "+231",
 
+    "valueSetEndPoint": "http://USERNAME:PASSWORD@liberia-staging.mhero.org:5001/CSD/SVS/RetrieveValueSet",
+
     "practitionerEndPoint": "http://USERNAME:PASSWORD@liberia-staging.mhero.org:5001/CSD/csr/merged_sierra_leone/careServicesRequest/urn:openhie.org:openinfoman-fhir:fhir_practitioner_read/adapter/fhir/Practitioner/_search?_format=json&name.text=&organization.reference=&location.reference=",
     "locationEndPoint": "http://USERNAME:PASSWORD@liberia-staging.mhero.org:5001/CSD/csr/merged_sierra_leone/careServicesRequest/urn:openhie.org:openinfoman-fhir:fhir_location_read/adapter/fhir/Location/_search?_format=json&name=&managingOrganization.reference=",
     "organisationEndPoint": "http://USERNAME:PASSWORD@liberia-staging.mhero.org:5001/CSD/csr/merged_sierra_leone/careServicesRequest/urn:openhie.org:openinfoman-fhir:fhir_organization_read/adapter/fhir/Organization/_search?_format=json&name=&partOf.reference=",
