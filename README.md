@@ -32,7 +32,8 @@ Run as a service:
 * ./scripts/server.js
 * (Access http://localhost:8082 to run pull and push)
 
-Run at staging server:
+Run at staging server
+---------------------
 
 * (Get LiberiaHWR.pem from Carl and copy it to ~/.ssh/ folder.)
 * ssh -i ~/.ssh/LiberiaHWR.pem -l ubuntu liberia-staging.mhero.org

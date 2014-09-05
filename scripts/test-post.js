@@ -1,8 +1,12 @@
 #!/usr/bin/env node
 
 var post_data = JSON.stringify({
-    "phone": "+2318886420085",
-    "groups": ["cool", "fancy"]
+    "name": "Jeff Xiong",
+    "phone": "+231888642008",
+    "groups": ["cool", "fancy"],
+    "fields": {
+        "globalId": "urn:dhis.org:liberia-training:csd:provider:dbQGGwj9Dke"
+    }
 });
 //var post_data = JSON.stringify({
 //    "name": "Triolapr Clihou",

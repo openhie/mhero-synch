@@ -57,6 +57,7 @@ describe('Practitioner', function () {
 
             expect(rapidProContacts.length).toBe(3);
             var firstRapidProContact = rapidProContacts[0];
+            expect(firstRapidProContact.fields.globalId).toBe('practitioner_1');
             expect(firstRapidProContact.phone).toBe('+231777926824');
             expect(firstRapidProContact.name).toBe('mr bill Traifrop');
             expect(firstRapidProContact.groups.length).toBe(3);

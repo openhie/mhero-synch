@@ -7,38 +7,49 @@ var Practitioner = function (item) {
     this.email = getContact(jsonContent, 'EMAIL');
     this.phone = getContact(jsonContent, 'BP');
 
-    this.toRapidProContact = function () {
-        var contact = { name: this.familyName + ' ' + this.givenName };
-        if (this.parent) {
-            contact.groups = this.parent.groups();
-        }
-        contact.phone = formalisePhoneNumber(this.phone);
-        return contact;
+    this.groups = function () {
+        return this.parent ? this.parent.groups() : undefined;
     };
 
-    function formalisePhoneNumber(rawPhoneNumber) {
-        if(!rawPhoneNumber || rawPhoneNumber.length == 0) {
+    this.fullName = function () {
+        return this.familyName + ' ' + this.givenName;
+    };
+
+    this.formalisedPhoneNumber = function () {
+        var rawPhoneNumber = this.phone;
+        if (!rawPhoneNumber || rawPhoneNumber.length == 0) {
             return null;
         }
 
-        var phoneNumber = rawPhoneNumber.split('/')[0].trim();
-        phoneNumber = phoneNumber.replace(/[^\d\+]/g, '');
+        var phoneNumber = rawPhoneNumber.split('/')[0].trim().replace(/[^\d\+]/g, '');
 
-        if (phoneNumber[0] == '0') {
-            if (phoneNumber[1] == '0') {
-                phoneNumber = '+' + phoneNumber.slice(2)
-            } else {
-                var Config = require(__dirname + '/config');
-                var config = new Config();
-                phoneNumber = config.countryCode + phoneNumber.slice(1)
-            }
+        if (phoneNumber[0] != '0') {
+            return phoneNumber;
         }
-        return phoneNumber;
-    }
+
+        if (phoneNumber[1] == '0') {
+            return '+' + phoneNumber.slice(2);
+        }
+
+        var Config = require(__dirname + '/config');
+        var config = new Config();
+        return config.countryCode + phoneNumber.slice(1);
+    };
+
+    this.toRapidProContact = function () {
+        return {
+            name: this.fullName(),
+            phone: this.formalisedPhoneNumber(),
+            groups: this.groups(),
+            fields: {
+                globalId: this.globalId
+            }
+        };
+    };
 
     function getName(postfix) {
         var name = jsonContent.name[postfix];
-        if(!name || name.length ==0) {
+        if (!name || name.length == 0) {
             return null;
         }
         return name[0];
