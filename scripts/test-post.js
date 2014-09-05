@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 
 var post_data = JSON.stringify({
-    "phone": "(+231) 0886-609-940/0777-209-840",
-    "name": "Ben Haggerty Jr.",
+    "phone": "+2318886420085",
     "groups": ["cool", "fancy"]
 });
 //var post_data = JSON.stringify({

@@ -31,3 +31,14 @@ Run as a service:
 
 * ./scripts/server.js
 * (Access http://localhost:8082 to run pull and push)
+
+Run at staging server:
+
+* (Get LiberiaHWR.pem from Carl and copy it to ~/.ssh/ folder.)
+* ssh -i ~/.ssh/LiberiaHWR.pem -l ubuntu liberia-staging.mhero.org
+* cd node/mhero-synch/
+* git pull
+* (Make sure config/hero-config.staging.json is what you want.)
+* forever restartall (Run the latest revision.) 
+* lynx http://localhost:8082 (Trigger a pull-push activity.)
+* (Check ~/.forever/Wr-_.log for logs. Check run/push.log for errors happened when pushing contacts to RapidPro.)
