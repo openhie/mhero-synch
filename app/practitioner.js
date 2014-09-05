@@ -7,8 +7,8 @@ var config = new Config();
 
 var ValueSet = require(__dirname + '/value-set');
 
-var Practitioner = function (item) {
-    var jsonContent = JSON.parse(item['atom:content']['#']);
+var Practitioner = function (jsonInFeed) {
+    var jsonContent = JSON.parse(jsonInFeed);
     this.globalId = jsonContent.identifier[0].value;
     this.role = jsonContent.role;
     this.parentId = getParentId();

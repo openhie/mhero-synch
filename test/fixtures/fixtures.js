@@ -8,12 +8,8 @@ function loadFixtures(modelClass, fixtureFile) {
     var rawJson = fs.readFileSync(fixtureFile, 'utf8');
     var practitionersInJson = JSON.parse(rawJson);
     return practitionersInJson.map(function (jsonObject) {
-        var item = {
-            'atom:content': {
-                '#': JSON.stringify(jsonObject)
-            }
-        };
-        return new modelClass(item);
+        var json = JSON.stringify(jsonObject);
+        return new modelClass(json);
     });
 }
 

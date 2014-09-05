@@ -1,0 +1,34 @@
+var XmlFeedReader = function(endPoint) {
+    this.load = function(handler, fallback) {
+        var Q = require('q');
+        var deferred = Q.defer();
+
+        var request = require('request');
+        request(endPoint, function (error, response, body) {
+            if(error || response.statusCode != 200) {
+                console.error('Error happened when access url:\n --> ' + endPoint);
+                deferred.resolve(fallback);
+                return;
+            }
+
+            var parseString = require('xml2js').parseString;
+            parseString(body, function (err, result) {
+                if(!result) {
+                    deferred.resolve(fallback);
+                    return;
+                }
+                try {
+                    deferred.resolve(handler(result));
+                } catch (e) {
+                    console.log('Error happened when handling result document:\n------');
+                    console.log(result);
+                    deferred.resolve(fallback);
+                }
+            });
+        });
+
+        return deferred.promise;
+    };
+};
+
+module.exports = XmlFeedReader;

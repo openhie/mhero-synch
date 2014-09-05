@@ -1,5 +1,5 @@
-var Location = function (item) {
-    var jsonContent = JSON.parse(item['atom:content']['#']);
+var Location = function (jsonInFeed) {
+    var jsonContent = JSON.parse(jsonInFeed);
     this.globalId = jsonContent.identifier[0].value;
     this.name = jsonContent.name;
     this.parentId = jsonContent.managingOrganization.reference;

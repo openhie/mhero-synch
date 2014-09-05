@@ -1,44 +1,18 @@
-var Q = require('q');
-
 var FeedReader = function(modelClass, endPointUrl) {
     this.loadAll = function() {
-        var deferred = Q.defer();
+        var XmlFeedReader = require(__dirname + '/xml-feed-reader');
+        var reader = new XmlFeedReader(endPointUrl);
 
-        var request = require('request'),
-            FeedParser = require('feedparser');
+        var createModelObjects = function(result) {
+            var atomEntries = result['atom:feed']['atom:entry'];
+            return atomEntries.map(function(atomEntry) {
+                var json = atomEntry['atom:content'][0]['_'];
+                return new modelClass(json);
+            });
+        };
+        var fallback = [];
 
-        var req = request(endPointUrl);
-        var feedParser = new FeedParser([]);
-
-        req.on('error', function (error) {
-            deferred.reject(error);
-        });
-
-        req.on('response', function (res) {
-            if (res.statusCode != 200) {
-                return this.emit('error', new Error('Bad status code'));
-            }
-            this.pipe(feedParser);
-        });
-
-        var allPractitioners = [];
-
-        feedParser.on('error', function (error) {
-            deferred.reject(error);
-        });
-
-        feedParser.on('readable', function () {
-            var item;
-            while (item = this.read()) {
-                allPractitioners.push(new modelClass(item));
-            }
-        });
-
-        feedParser.on('end', function () {
-            deferred.resolve(allPractitioners);
-        });
-
-        return deferred.promise;
+        return reader.load(createModelObjects, fallback);
     }
 };
 
