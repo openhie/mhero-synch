@@ -63,9 +63,10 @@ var Hero = function () {
                 return Organisation.loadAll(organisationEndPoint).then(function (allOrganisations) {
                     var mergedPractitioners = Practitioner.merge(allPractitioners, allLocations, allOrganisations);
                     console.log(mergedPractitioners.length.toString() + ' practitioners downloaded from HWR');
-                    var allContacts = Practitioner.formatForRapidPro(mergedPractitioners);
-                    writeToCache(allContacts);
-                    console.log(allContacts.length.toString() + ' contacts put into cache');
+                    return Practitioner.formatForRapidPro(mergedPractitioners).then(function(allContacts) {
+                        writeToCache(allContacts);
+                        console.log(allContacts.length.toString() + ' contacts put into cache');
+                    });
                 });
             });
         });

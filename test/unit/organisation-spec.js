@@ -8,7 +8,7 @@ describe('Organisation', function () {
     describe('loadAll', function () {
         it('loads all organisations from a remote end point', function (done) {
             Organisation.loadAll(endPointUrl).then(function (allOrganisations) {
-                expect(allOrganisations.length).toBe(168);
+                expect(allOrganisations.length).toBe(10);
 
                 var firstOrganisation = allOrganisations[0];
                 expect(firstOrganisation.globalId).toBe('urn:dhis.org:sierra-leone-demo:csd:organization:g8DdBm7EmUt');

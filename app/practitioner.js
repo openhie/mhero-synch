@@ -18,23 +18,32 @@ var Practitioner = function (item) {
     this.phone = getContact(jsonContent, 'BP');
 
     this.groups = function () {
-        return this.parent ? this.parent.groups() : undefined;
+        return this.parent ? this.parent.groups() : [];
     };
 
     this.cadres = function () {
+        // FIXME: I don't like this another level of defer
+        var deferred = Q.defer();
+
         if (!this.role) {
-            return [];
+            deferred.resolve([]);
+        } else {
+            var promises = this.role.map(function (role) {
+                var coding = role.coding[0];
+                return ValueSet.load(config.valueSetEndPoint, coding.system.split(':')[2]).then(function (valueSet) {
+                    var concept = valueSet.get(coding.code);
+                    return concept == null ? null : concept.displayName;
+                });
+            });
+            Q.all(promises).then(function (allCadres) {
+                var nonNullCadres = allCadres.filter(function (cadre) {
+                    return cadre != null;
+                });
+                deferred.resolve(nonNullCadres);
+            });
         }
 
-        var promises = this.role.map(function (role) {
-            var coding = role.coding[0];
-            return ValueSet.load(config.valueSetEndPoint, coding.system.split(':')[2]).then(function (valueSet) {
-                var concept = valueSet.get(coding.code);
-                return concept.displayName;
-            });
-        });
-
-        return Q.all(promises);
+        return deferred.promise;
     };
 
     this.fullName = function () {
@@ -61,7 +70,7 @@ var Practitioner = function (item) {
     };
 
     this.toRapidProContact = function () {
-        return {
+        var contact = {
             name: this.fullName(),
             phone: this.formalisedPhoneNumber(),
             groups: this.groups(),
@@ -69,6 +78,11 @@ var Practitioner = function (item) {
                 globalId: this.globalId
             }
         };
+        return this.cadres().then(function (cadres) {
+            contact.cadres = cadres;
+            contact.groups = contact.groups.concat(cadres);
+            return contact;
+        });
     };
 
     function getName(postfix) {
@@ -130,9 +144,10 @@ Practitioner.merge = function (allPractitioners, allLocations, allOrganisations)
 };
 
 Practitioner.formatForRapidPro = function (allPractitioners) {
-    return allPractitioners.map(function (practitioner) {
+    var allPromises = allPractitioners.map(function (practitioner) {
         return practitioner.toRapidProContact();
     });
+    return Q.all(allPromises);
 };
 
 module.exports = Practitioner;
