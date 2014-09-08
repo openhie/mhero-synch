@@ -1,5 +1,6 @@
 var FeedReader = function(modelClass, endPointUrl) {
     this.loadAll = function() {
+
         var XmlFeedReader = require(__dirname + '/xml-feed-reader');
         var reader = new XmlFeedReader(endPointUrl);
 

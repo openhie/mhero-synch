@@ -1,7 +1,7 @@
 var ValueSet = require(__dirname + '/../../app/value-set');
 
 var Config = require(__dirname + '/../../app/config');
-var config = new Config('dev');
+var config = new Config();
 
 describe('ValueSet', function () {
     describe('load', function () {

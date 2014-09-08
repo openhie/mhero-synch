@@ -1,0 +1,9 @@
+{
+    "hwr": {
+        "username": "YOUR-USERNAME",
+        "password": "YOUR-PASSWORD"
+    },
+    "rapidpro": {
+        "token": "YOUR-TOKEN"
+    }
+}

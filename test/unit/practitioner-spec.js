@@ -1,6 +1,6 @@
 var Practitioner = require(__dirname + '/../../app/practitioner');
 var Config = require(__dirname + '/../../app/config');
-var config = new Config('dev');
+var config = new Config();
 
 describe('Practitioner', function () {
     var Fixtures = require(__dirname + '/../fixtures/fixtures');

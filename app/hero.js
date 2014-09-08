@@ -34,7 +34,7 @@ function postContactToRapidPro(rapidProContactEndPoint, contact, logFile) {
     request.post({
         headers: {
             'content-type': 'application/json',
-            Authorization: 'Token ' + config.rapidProAuthorisationToken
+            Authorization: 'Token ' + config.authentication.rapidpro.token
         },
         url: rapidProContactEndPoint,
         body: JSON.stringify(contact)
@@ -58,6 +58,7 @@ var Hero = function () {
         var locationEndPoint = config.locationEndPoint;
         var organisationEndPoint = config.organisationEndPoint;
 
+        // FIXME: better to use Q.all here
         return Practitioner.loadAll(practitionerEndPoint).then(function (allPractitioners) {
             return Location.loadAll(locationEndPoint).then(function (allLocations) {
                 return Organisation.loadAll(organisationEndPoint).then(function (allOrganisations) {

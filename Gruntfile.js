@@ -10,6 +10,12 @@ module.exports = function (grunt) {
             '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
             '* Copyright (c) <%= grunt.template.today("yyyy") %> ',
 
+        env: {
+            dev: {
+                HERO_ENV: 'dev'
+            }
+        },
+
         jasmine_node: {
             options: {
                 forceExit: true,
@@ -28,8 +34,8 @@ module.exports = function (grunt) {
     });
 
     grunt.loadNpmTasks('grunt-jasmine-node');
-
+    grunt.loadNpmTasks('grunt-env');
 
     // Default task.
-    grunt.registerTask('default', ['jasmine_node:unit']);
+    grunt.registerTask('default', ['env', 'jasmine_node:unit']);
 };

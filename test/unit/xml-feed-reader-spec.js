@@ -1,7 +1,7 @@
 var XmlFeedReader = require(__dirname + '/../../app/xml-feed-reader');
 
 var Config = require(__dirname + '/../../app/config');
-var config = new Config('dev');
+var config = new Config();
 
 describe('XmlFeedReader', function () {
     describe('load', function () {

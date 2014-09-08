@@ -5,6 +5,7 @@
     "devDependencies": {
         "grunt": "0.4.1",
         "grunt-cli": "*",
+        "grunt-env": "0.4.1",
         "grunt-jasmine-node": "~0.2.1",
         "jasmine-reporters": "~0.2.1",
         "jasmine-node": "~2.0.0"
@@ -12,7 +13,7 @@
     "dependencies": {
         "request": "~2.34.0",
         "q": "1.0.1",
-        "feedparser": "0.19.1",
+        "btoa": "1.1.2",
         "xml2js": "0.4.4"
     }
 }

@@ -1,6 +1,6 @@
 var Organisation = require(__dirname + '/../../app/organisation');
 var Config = require(__dirname + '/../../app/config');
-var config = new Config('dev');
+var config = new Config();
 
 describe('Organisation', function () {
     var endPointUrl = config.organisationEndPoint;

@@ -1,6 +1,6 @@
 var Location = require(__dirname + '/../../app/location');
 var Config = require(__dirname + '/../../app/config');
-var config = new Config('dev');
+var config = new Config();
 
 describe('Location', function () {
     describe('loadAll', function () {
