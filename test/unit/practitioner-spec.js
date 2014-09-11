@@ -9,21 +9,21 @@ describe('Practitioner', function () {
         it('loads all practitioners from a remote end point', function (done) {
             var endPointUrl = config.practitionerEndPoint;
             Practitioner.loadAll(endPointUrl).then(function (allPractitioners) {
-                expect(allPractitioners.length).toBe(38);
+                expect(allPractitioners.length).toBe(50);
 
                 var firstPractitioner = allPractitioners[0];
-                expect(firstPractitioner.globalId).toBe('urn:ihris.org:manage-demo:csd:provider:person|9924');
-                expect(firstPractitioner.parentId).toBe('urn:dhis.org:sierra-leone-demo:csd:facility:Bift1B4gjru');
-                expect(firstPractitioner.givenName).toBe('Tiastejoclou');
-                expect(firstPractitioner.familyName).toBe('Dem');
-                expect(firstPractitioner.email).toBe(null);
+                expect(firstPractitioner.globalId).toBe('urn:dhis.org:sierra-leone-demo:csd:provider:dbQGGwj9Dke');
+                expect(firstPractitioner.parentId).toBe('urn:dhis.org:sierra-leone-demo:csd:organization:LHNiyIWuLdc');
+                expect(firstPractitioner.givenName).toBe('Jallah');
+                expect(firstPractitioner.familyName).toBe('Kennedy');
+                expect(firstPractitioner.email).toBe('jallahmk@hotmail.com');
                 expect(firstPractitioner.phone).toBe(null);
                 expect(firstPractitioner.role.length).toBe(1);
-                expect(firstPractitioner.role[0].coding[0].code).toBe('MD');
+                expect(firstPractitioner.role[0].coding[0].code).toBe('klAj78967SP');
 
                 var lastPractitioner = allPractitioners[allPractitioners.length - 1];
-                expect(lastPractitioner.globalId).toBe('urn:dhis.org:sierra-leone-demo:csd:provider:o3wC90im0LD');
-                expect(lastPractitioner.phone).toBe('12456789');
+                expect(lastPractitioner.globalId).toBe('urn:dhis.org:sierra-leone-demo:csd:provider:ZvdwFSB8Aa8');
+                expect(lastPractitioner.phone).toBe('0886 75 6818');
 
                 done();
             }).catch(function (error) {
@@ -81,6 +81,7 @@ describe('Practitioner', function () {
                 expect(rapidProContacts.length).toBe(3);
                 var firstRapidProContact = rapidProContacts[0];
                 expect(firstRapidProContact.fields.globalId).toBe('practitioner_1');
+                expect(firstRapidProContact.fields.facility).toBe('York CHC');
                 expect(firstRapidProContact.phone).toBe('+231777926824');
                 expect(firstRapidProContact.name).toBe('mr bill Traifrop');
                 expect(firstRapidProContact.groups.length).toBe(4);

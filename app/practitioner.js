@@ -75,7 +75,8 @@ var Practitioner = function (jsonInFeed) {
             phone: this.formalisedPhoneNumber(),
             groups: this.groups(),
             fields: {
-                globalId: this.globalId
+                globalId: this.globalId,
+                facility: this.parent ? this.parent.name : ''
             }
         };
         return this.cadres().then(function (cadres) {
