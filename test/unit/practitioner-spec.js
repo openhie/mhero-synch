@@ -11,19 +11,20 @@ describe('Practitioner', function () {
             Practitioner.loadAll(endPointUrl).then(function (allPractitioners) {
                 expect(allPractitioners.length).toBe(50);
 
-                var firstPractitioner = allPractitioners[0];
-                expect(firstPractitioner.globalId).toBe('urn:dhis.org:sierra-leone-demo:csd:provider:dbQGGwj9Dke');
-                expect(firstPractitioner.parentId).toBe('urn:dhis.org:sierra-leone-demo:csd:organization:LHNiyIWuLdc');
-                expect(firstPractitioner.givenName).toBe('Jallah');
-                expect(firstPractitioner.familyName).toBe('Kennedy');
-                expect(firstPractitioner.email).toBe('jallahmk@hotmail.com');
-                expect(firstPractitioner.phone).toBe(null);
-                expect(firstPractitioner.role.length).toBe(1);
-                expect(firstPractitioner.role[0].coding[0].code).toBe('klAj78967SP');
+                var practitioner = allPractitioners[47];
+                expect(practitioner.globalId).toBe('urn:dhis.org:sierra-leone-demo:csd:provider:dbQGGwj9Dke');
+                expect(practitioner.parentId).toBe('urn:dhis.org:sierra-leone-demo:csd:organization:LHNiyIWuLdc');
+                expect(practitioner.givenName).toBe('Jallah');
+                expect(practitioner.familyName).toBe('Kennedy');
+                expect(practitioner.email).toBe('jallahmk@hotmail.com');
+                expect(practitioner.phone).toBe(null);
+                expect(practitioner.role.length).toBe(1);
+                expect(practitioner.role[0].coding[0].code).toBe('klAj78967SP');
 
-                var lastPractitioner = allPractitioners[allPractitioners.length - 1];
-                expect(lastPractitioner.globalId).toBe('urn:dhis.org:sierra-leone-demo:csd:provider:ZvdwFSB8Aa8');
-                expect(lastPractitioner.phone).toBe('0886 75 6818');
+                var chv = allPractitioners[0];
+                expect(chv.globalId).toBe('urn:x-excelfile:Bong.xlsx:gCHV:provider:1');
+                expect(chv.fullName()).toBe('Sam Willie');
+                expect(chv.phone).toBe('886979474');
 
                 done();
             }).catch(function (error) {
@@ -90,6 +91,16 @@ describe('Practitioner', function () {
                 expect(firstRapidProContact.groups[2]).toBe('Sierra Leone');
                 expect(firstRapidProContact.groups[3]).toBe('Ebola Data entry');
 
+                done();
+            });
+        });
+
+        it('adds national code in front', function(done) {
+            var practitioner = allPractitioners[0];
+            practitioner.phone = '886333523';
+
+            practitioner.toRapidProContact().then(function (contact) {
+                expect(contact.phone).toBe('+231886333523');
                 done();
             });
         });

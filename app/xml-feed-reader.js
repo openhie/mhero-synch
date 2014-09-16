@@ -32,8 +32,9 @@ var XmlFeedReader = function(endPoint) {
                 try {
                     deferred.resolve(handler(result));
                 } catch (e) {
-                    console.log('Error happened when handling result document:\n------');
-                    console.log(result);
+                    console.error('Error happened when handling result document:\n------');
+                    console.error(result);
+                    console.error(e.stack);
                     deferred.resolve(fallback);
                 }
             });

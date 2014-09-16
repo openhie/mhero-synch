@@ -1,7 +1,5 @@
 var Q = require('q');
 
-// FIXME: environment should be controlled by a global environment variable
-// FIXME: basic authentication should be extracted from config
 var Config = require(__dirname + '/config');
 var config = new Config();
 
@@ -14,6 +12,7 @@ var Practitioner = function (jsonInFeed) {
     this.parentId = getParentId();
     this.familyName = getName('family');
     this.givenName = getName('given');
+    this.textName = jsonContent.name.text;
     this.email = getContact(jsonContent, 'EMAIL');
     this.phone = getContact(jsonContent, 'BP');
 
@@ -47,7 +46,10 @@ var Practitioner = function (jsonInFeed) {
     };
 
     this.fullName = function () {
-        return this.familyName + ' ' + this.givenName;
+        if (this.familyName && this.givenName) {
+            return this.familyName + ' ' + this.givenName;
+        }
+        return this.textName;
     };
 
     this.formalisedPhoneNumber = function () {
@@ -58,8 +60,12 @@ var Practitioner = function (jsonInFeed) {
 
         var phoneNumber = rawPhoneNumber.split('/')[0].trim().replace(/[^\d\+]/g, '');
 
-        if (phoneNumber[0] != '0') {
+        if (phoneNumber[0] == '+') {
             return phoneNumber;
+        }
+
+        if(phoneNumber[0] != '0') {
+            return config.countryCode + phoneNumber;
         }
 
         if (phoneNumber[1] == '0') {
@@ -99,7 +105,10 @@ var Practitioner = function (jsonInFeed) {
         if (location && location.length > 0) {
             return location[0].reference;
         }
-        return jsonContent.organization.reference;
+        if (jsonContent.organization) {
+            return jsonContent.organization.reference;
+        }
+        return null;
     }
 
     function getContact(jsonContent, contactField) {
