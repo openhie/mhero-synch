@@ -49,7 +49,7 @@ function postContactToRapidPro(rapidProContactEndPoint, contact, logFile) {
                 if(contact.uuid) {
                     process.stdout.write('.');
                 } else {
-                    updatePractitionerInHwr(contact, responseContact).then(function (responseBody) {
+                    updatePractitionerInHwr(contact, responseContact).then(function () {
                         process.stdout.write('.');
                     });
                 }

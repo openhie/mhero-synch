@@ -5,10 +5,12 @@ var config = new Config();
 
 var ValueSet = require(__dirname + '/value-set');
 
+var rapidProIdAssigner = 'http://rapidpro.io/' + config.authentication.rapidpro.instance;
+
 var Practitioner = function (jsonInFeed) {
     var jsonContent = JSON.parse(jsonInFeed);
     this.globalId = jsonContent.identifier[0].value;
-    this.rapidProId = findIdByAssigner('http://rapidpro.io/');
+    this.rapidProId = findIdByAssigner(rapidProIdAssigner);
     this.role = jsonContent.role;
     this.parentId = getParentId();
     this.familyName = getName('family');
@@ -177,7 +179,7 @@ Practitioner.createRapidProIdInHwr = function (practitionerId, rapidProId) {
         "   <function urn='urn:openhie.org:openinfoman-hwr:stored-function:health_worker_create_otherid'>" +
         "       <requestParams>" +
         "           <id urn='" + practitionerId + "'/>" +
-        "           <otherID assigningAuthorityName='http://rapidpro.io/' code='" + rapidProId + "' />" +
+        "           <otherID assigningAuthorityName='" + rapidProIdAssigner + "' code='" + rapidProId + "' />" +
         "       </requestParams>" +
         "   </function>" +
         "</csd:careServicesRequest>";

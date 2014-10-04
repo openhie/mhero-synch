@@ -1,6 +1,7 @@
 var Practitioner = require(__dirname + '/../../app/practitioner');
 var Config = require(__dirname + '/../../app/config');
 var config = new Config();
+config.authentication.rapidpro.instance = '';
 
 describe('Practitioner', function () {
     var Fixtures = require(__dirname + '/../fixtures/fixtures');

@@ -4,6 +4,7 @@
         "password": "YOUR-PASSWORD"
     },
     "rapidpro": {
+        "instance": "YOUR-INSTANCE",
         "token": "YOUR-TOKEN"
     }
 }
