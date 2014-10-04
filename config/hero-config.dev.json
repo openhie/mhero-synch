@@ -6,6 +6,8 @@
     "valueSetEndPoint": "http://liberia-staging.mhero.org:5001/CSD/SVS/RetrieveValueSet",
 
     "practitionerEndPoint": "http://liberia-staging.mhero.org:5001/CSD/csr/merge_liberia_sep_12_2014-0/careServicesRequest/urn:openhie.org:openinfoman-fhir:fhir_practitioner_read/adapter/fhir/Practitioner/_search?_format=json&name.text=&organization.reference=&location.reference=&_count=50",
+    "practitionerUpdateEndPoint": "http://liberia-staging.mhero.org:5001/CSD/csr/merge_liberia_sep_9_2014-0/careServicesRequest/update",
+
     "locationEndPoint": "http://liberia-staging.mhero.org:5001/CSD/csr/merge_liberia_sep_12_2014-0/careServicesRequest/urn:openhie.org:openinfoman-fhir:fhir_location_read/adapter/fhir/Location/_search?_format=json&name=&managingOrganization.reference=&_count=50",
     "organisationEndPoint": "http://liberia-staging.mhero.org:5001/CSD/csr/merge_liberia_sep_12_2014-0/careServicesRequest/urn:openhie.org:openinfoman-fhir:fhir_organization_read/adapter/fhir/Organization/_search?_format=json&name=&partOf.reference=&_count=50",
 

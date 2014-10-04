@@ -5,6 +5,10 @@
             {
                 "value": "practitioner_1",
                 "assigner": "http://demo.ihris.org/manage"
+            },
+            {
+                "value": "rapid_pro_contact_1",
+                "assigner": "http://rapidpro.io/"
             }
         ],
         "name": {
@@ -57,6 +61,10 @@
             {
                 "value": "practitioner_2",
                 "assigner": "http://demo.ihris.org/manage"
+            },
+            {
+                "value": "rapid_pro_contact_2",
+                "assigner": "http://rapidpro.io/"
             }
         ],
         "name": {

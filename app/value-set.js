@@ -11,8 +11,8 @@ var ValueSet = function (concepts) {
 };
 
 ValueSet.load = function (endPoint, codingSystem) {
-    var XmlFeedReader = require(__dirname + '/xml-feed-reader');
-    var reader = new XmlFeedReader(endPoint + '?ID=' + codingSystem);
+    var HwrEndPoint = require(__dirname + '/hwr-end-point');
+    var hwr = new HwrEndPoint(endPoint + '?ID=' + codingSystem);
 
     var createValueSet = function(result) {
         var rawValueSet = result['svs:RetrieveValueSetResponse']['svs:ValueSet'];
@@ -28,7 +28,7 @@ ValueSet.load = function (endPoint, codingSystem) {
     };
     var fallback = new ValueSet();
 
-    return reader.load(createValueSet, fallback);
+    return hwr.load(createValueSet, fallback);
 };
 
 module.exports = ValueSet;

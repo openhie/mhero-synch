@@ -9,20 +9,14 @@
 //    }
 //});
 var post_data = JSON.stringify({
-    "name": "Tamba Idrissa",
-    "phone": "+231880768763",
-    "groups": ["Liberia, Grand Cape Mount", "Liberia", "Report administrator"],
-    "fields": {
-        "globalId": "urn:dhis.org:sierra-leone-demo:csd:provider:ejvfOQLwvrv",
-        "facility": "Grand Cape Mount"
-    },
-    "cadres": ["Report administrator"]
+    "name": "John S. Suah",
+    "uuid": "ef5bc430-cf61-4bb5-9abf-4ed16bad0a1e",
+    "groups": ["gCHV: Community Focal Person"],
+//    "urns": ["tel:+231886333523"],
+//    "urns": ["tel:+231886333524"],
+    "fields": {"globalid": "urn:x-excelfile:Bong.xlsx:gCHV:provider:3"},
+    "phone": "+231886333523"
 });
-//var post_data = JSON.stringify({
-//    "name": "Triolapr Clihou",
-//    "groups": ["Benguima Grassfield MCHP-Rural Western Area-Western Area-Sierra Leone"],
-//    "phone": "+250788100006"
-//});
 
 
 // Set up the request

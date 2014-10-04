@@ -8,6 +8,7 @@ var ValueSet = require(__dirname + '/value-set');
 var Practitioner = function (jsonInFeed) {
     var jsonContent = JSON.parse(jsonInFeed);
     this.globalId = jsonContent.identifier[0].value;
+    this.rapidProId = findIdByAssigner('http://rapidpro.io/');
     this.role = jsonContent.role;
     this.parentId = getParentId();
     this.familyName = getName('family');
@@ -64,7 +65,7 @@ var Practitioner = function (jsonInFeed) {
             return phoneNumber;
         }
 
-        if(phoneNumber[0] != '0') {
+        if (phoneNumber[0] != '0') {
             return config.countryCode + phoneNumber;
         }
 
@@ -78,6 +79,7 @@ var Practitioner = function (jsonInFeed) {
     this.toRapidProContact = function () {
         var contact = {
             name: this.fullName(),
+            uuid: this.rapidProId,
             phone: this.formalisedPhoneNumber(),
             groups: this.groups(),
             fields: {
@@ -91,6 +93,14 @@ var Practitioner = function (jsonInFeed) {
             return contact;
         });
     };
+
+    function findIdByAssigner(assigner) {
+        var allIds = jsonContent.identifier;
+        var foundIds = allIds.filter(function (id) {
+            return id.assigner === assigner;
+        });
+        return foundIds.length > 0 ? foundIds[0].value : null;
+    }
 
     function getName(postfix) {
         var name = jsonContent.name[postfix];
@@ -158,6 +168,23 @@ Practitioner.formatForRapidPro = function (allPractitioners) {
         return practitioner.toRapidProContact();
     });
     return Q.all(allPromises);
+};
+
+Practitioner.createRapidProIdInHwr = function (practitionerId, rapidProId) {
+    var dataLoad =
+        "<?xml version='1.0' encoding='utf-8'?>" +
+        "<csd:careServicesRequest xmlns:csd='urn:ihe:iti:csd:2013' xmlns='urn:ihe:iti:csd:2013'>" +
+        "   <function urn='urn:openhie.org:openinfoman-hwr:stored-function:health_worker_create_otherid'>" +
+        "       <requestParams>" +
+        "           <id urn='" + practitionerId + "'/>" +
+        "           <otherID assigningAuthorityName='http://rapidpro.io/' code='" + rapidProId + "' />" +
+        "       </requestParams>" +
+        "   </function>" +
+        "</csd:careServicesRequest>";
+
+    var HwrEndPoint = require(__dirname + '/hwr-end-point');
+    var hwr = new HwrEndPoint(config.practitionerUpdateEndPoint);
+    return hwr.update(dataLoad);
 };
 
 module.exports = Practitioner;

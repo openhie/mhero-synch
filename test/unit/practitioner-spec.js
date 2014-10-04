@@ -25,6 +25,7 @@ describe('Practitioner', function () {
                 expect(chv.globalId).toBe('urn:x-excelfile:Bong.xlsx:gCHV:provider:1');
                 expect(chv.fullName()).toBe('Sam Willie');
                 expect(chv.phone).toBe('886979474');
+                expect(chv.rapidProId).toBe('c97d601f-60ff-47a8-a55a-0beac7581fc1');
 
                 done();
             }).catch(function (error) {
@@ -85,6 +86,7 @@ describe('Practitioner', function () {
                 expect(firstRapidProContact.fields.facility).toBe('York CHC');
                 expect(firstRapidProContact.phone).toBe('+231777926824');
                 expect(firstRapidProContact.name).toBe('mr bill Traifrop');
+                expect(firstRapidProContact.uuid).toBe('rapid_pro_contact_1');
                 expect(firstRapidProContact.groups.length).toBe(4);
                 expect(firstRapidProContact.groups[0]).toBe('Sierra Leone, Sittia, York CHC');
                 expect(firstRapidProContact.groups[1]).toBe('Sierra Leone, Sittia');
@@ -95,7 +97,7 @@ describe('Practitioner', function () {
             });
         });
 
-        it('adds national code in front', function(done) {
+        it('adds national code in front', function (done) {
             var practitioner = allPractitioners[0];
             practitioner.phone = '886333523';
 
@@ -141,13 +143,13 @@ describe('Practitioner', function () {
         it('fills cadres into contact', function (done) {
             var practitioner = allPractitioners[0];
 
-            practitioner.toRapidProContact().then(function(contact) {
+            practitioner.toRapidProContact().then(function (contact) {
                 expect(contact.cadres).toEqual(['Ebola Data entry']);
                 done();
             });
         });
 
-        it('does not fill cadre if code system does not exist', function(done) {
+        it('does not fill cadre if code system does not exist', function (done) {
             var practitioner = allPractitioners[0];
             practitioner.role = [
                 {
@@ -157,8 +159,18 @@ describe('Practitioner', function () {
                 }
             ];
 
-            practitioner.toRapidProContact().then(function(contact) {
+            practitioner.toRapidProContact().then(function (contact) {
                 expect(contact.cadres).toEqual([]);
+                done();
+            });
+        });
+    });
+
+    describe('createRapidProIdInHwr', function () {
+        it('updates practitioner in HWR with RapidPro id', function (done) {
+            var practitionerId = 'urn:dhis.org:sierra-leone-demo:csd:provider:dbQGGwj9Dke';
+            var rapidProId = '12345';
+            Practitioner.createRapidProIdInHwr(practitionerId, rapidProId).then(function () {
                 done();
             });
         });
