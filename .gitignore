@@ -6,3 +6,4 @@ reports
 config/hero-auth-config.dev.json
 config/hero-auth-config.staging.json
 run/*
+*~
