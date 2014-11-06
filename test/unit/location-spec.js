@@ -10,7 +10,7 @@ describe('Location', function () {
                 expect(allLocations.length).toBe(50);
 
                 var firstLocation = allLocations[0];
-                expect(firstLocation.globalId).toBe('urn:dhis.org:sierra-leone-demo:csd:facility:zhK0MJtc2uB');
+                expect(firstLocation.globalid).toBe('urn:dhis.org:sierra-leone-demo:csd:facility:zhK0MJtc2uB');
                 expect(firstLocation.name).toBe('Uncle Dah Medicine Store');
                 expect(firstLocation.parentId).toBe('urn:dhis.org:sierra-leone-demo:csd:organization:VXewC2uAW2s');
 

@@ -5,7 +5,7 @@
 //    "phone": "+231888642008",
 //    "groups": ["cool", "fancy"],
 //    "fields": {
-//        "globalId": "urn:dhis.org:liberia-training:csd:provider:dbQGGwj9Dke"
+//        "globalid": "urn:dhis.org:liberia-training:csd:provider:dbQGGwj9Dke"
 //    }
 //});
 var post_data = JSON.stringify({

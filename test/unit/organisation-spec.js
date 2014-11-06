@@ -11,7 +11,7 @@ describe('Organisation', function () {
                 expect(allOrganisations.length).toBe(50);
 
                 var firstOrganisation = allOrganisations[0];
-                expect(firstOrganisation.globalId).toBe('urn:dhis.org:sierra-leone-demo:csd:organization:sVRpsRz4hSk');
+                expect(firstOrganisation.globalid).toBe('urn:dhis.org:sierra-leone-demo:csd:organization:sVRpsRz4hSk');
                 expect(firstOrganisation.name).toBe('District # 2');
 
                 done();

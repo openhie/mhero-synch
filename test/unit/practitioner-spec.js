@@ -13,7 +13,7 @@ describe('Practitioner', function () {
                 expect(allPractitioners.length).toBe(50);
 
                 var practitioner = allPractitioners[47];
-                expect(practitioner.globalId).toBe('urn:dhis.org:sierra-leone-demo:csd:provider:dbQGGwj9Dke');
+                expect(practitioner.globalid).toBe('urn:dhis.org:sierra-leone-demo:csd:provider:dbQGGwj9Dke');
                 expect(practitioner.parentId).toBe('urn:dhis.org:sierra-leone-demo:csd:organization:LHNiyIWuLdc');
                 expect(practitioner.givenName).toBe('Jallah');
                 expect(practitioner.familyName).toBe('Kennedy');
@@ -23,7 +23,7 @@ describe('Practitioner', function () {
                 expect(practitioner.role[0].coding[0].code).toBe('klAj78967SP');
 
                 var chv = allPractitioners[0];
-                expect(chv.globalId).toBe('urn:x-excelfile:Bong.xlsx:gCHV:provider:1');
+                expect(chv.globalid).toBe('urn:x-excelfile:Bong.xlsx:gCHV:provider:1');
                 expect(chv.fullName()).toBe('Sam Willie');
                 expect(chv.phone).toBe('886979474');
                 expect(chv.rapidProId).toBe('c97d601f-60ff-47a8-a55a-0beac7581fc1');
@@ -45,8 +45,8 @@ describe('Practitioner', function () {
             var mergedPractitioners = Practitioner.merge(allPractitioners, allLocations, allOrganisations);
 
             expect(mergedPractitioners.length).toBe(3);
-            expect(mergedPractitioners[0].parent.globalId).toBe('location_1');
-            expect(mergedPractitioners[0].parent.parent.globalId).toBe('organisation_1');
+            expect(mergedPractitioners[0].parent.globalid).toBe('location_1');
+            expect(mergedPractitioners[0].parent.parent.globalid).toBe('organisation_1');
             expect(allLocations[0].fullName()).toBe('Sierra Leone, Sittia, York CHC')
         });
     });
@@ -83,7 +83,7 @@ describe('Practitioner', function () {
             Practitioner.formatForRapidPro(mergedPractitioners).then(function (rapidProContacts) {
                 expect(rapidProContacts.length).toBe(3);
                 var firstRapidProContact = rapidProContacts[0];
-                expect(firstRapidProContact.fields.globalId).toBe('practitioner_1');
+                expect(firstRapidProContact.fields.globalid).toBe('practitioner_1');
                 expect(firstRapidProContact.fields.facility).toBe('York CHC');
                 expect(firstRapidProContact.phone).toBe('+231777926824');
                 expect(firstRapidProContact.name).toBe('mr bill Traifrop');

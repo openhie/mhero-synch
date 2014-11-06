@@ -9,7 +9,7 @@ var rapidProIdAssigner = 'http://rapidpro.io/' + config.authentication.rapidpro.
 
 var Practitioner = function (jsonInFeed) {
     var jsonContent = JSON.parse(jsonInFeed);
-    this.globalId = jsonContent.identifier[0].value;
+    this.globalid = jsonContent.identifier[0].value;
     this.rapidProId = findIdByAssigner(rapidProIdAssigner);
     this.role = jsonContent.role;
     this.parentId = getParentId();
@@ -85,7 +85,7 @@ var Practitioner = function (jsonInFeed) {
             phone: this.formalisedPhoneNumber(),
             groups: this.groups(),
             fields: {
-                globalId: this.globalId,
+                globalid: this.globalid,
                 facility: this.parent ? this.parent.name : ''
             }
         };
@@ -146,9 +146,9 @@ Practitioner.loadAll = function (url) {
 Practitioner.merge = function (allPractitioners, allLocations, allOrganisations) {
     var allObjects = allPractitioners.concat(allLocations).concat(allOrganisations);
 
-    function findById(allObjects, globalId) {
+    function findById(allObjects, globalid) {
         return allObjects.filter(function (object) {
-            return object.globalId == globalId;
+            return object.globalid == globalid;
         })[0];
     }
 
@@ -158,7 +158,7 @@ Practitioner.merge = function (allPractitioners, allLocations, allOrganisations)
 
     allLocations.forEach(function (location) {
         if (!location.parent) {
-            throw '[DATA ERROR] Location must have a parent, but this does not: ' + location.globalId;
+            throw '[DATA ERROR] Location must have a parent, but this does not: ' + location.globalid;
         }
     });
 

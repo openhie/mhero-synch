@@ -12,7 +12,7 @@ var Config = require(__dirname + '/config');
 var config = new Config();
 
 function writeToCache(contacts) {
-    fs.writeFileSync(cacheFile, JSON.stringify(contacts,null,'\t'));
+    fs.writeFileSync(cacheFile, JSON.stringify(contacts,null));
 }
 
 function readFromCache() {
@@ -21,7 +21,7 @@ function readFromCache() {
 }
 
 function updatePractitionerInHwr(contact, responseContact) {
-    return Practitioner.createRapidProIdInHwr(contact.fields.globalId, responseContact.uuid);
+    return Practitioner.createRapidProIdInHwr(contact.fields.globalid, responseContact.uuid);
 }
 
 function postContactToRapidPro(rapidProContactEndPoint, contact, logFile) {
@@ -84,7 +84,7 @@ var Hero = function () {
     };
 
     this.push = function () {
-        var rapidProContactEndPoint = config.rapidProContactEndPoint;
+        var rapidProContactEndPoint = config.rapidProAPIEndPoint + "/contacts.json";
         var allContacts = readFromCache();
 
         var logFile = fs.createWriteStream(runDir + '/push.log', {flags: 'w'});
