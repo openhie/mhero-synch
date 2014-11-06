@@ -12,7 +12,7 @@ var Config = require(__dirname + '/config');
 var config = new Config();
 
 function writeToCache(contacts) {
-    fs.writeFileSync(cacheFile, JSON.stringify(contacts));
+    fs.writeFileSync(cacheFile, JSON.stringify(contacts,null,'\t'));
 }
 
 function readFromCache() {
