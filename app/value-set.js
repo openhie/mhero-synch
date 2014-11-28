@@ -13,14 +13,12 @@ var ValueSet = function (concepts) {
 var cache = {};
 
 ValueSet.load = function (endPoint, codingSystem) {
-    var XmlFeedReader = require(__dirname + '/xml-feed-reader');
     var full_endpoint = endPoint + '?ID=' + codingSystem;
     if (full_endpoint in cache) {
 	return cache[full_endpoint];
     } else {
-	var reader = new XmlFeedReader(full_endpoint);
 	var HwrEndPoint = require(__dirname + '/hwr-end-point');
-	var hwr = new HwrEndPoint(full_endoint);
+	var hwr = new HwrEndPoint(full_endpoint);
 
 	var createValueSet = function(result) {
             var rawValueSet = result['svs:RetrieveValueSetResponse']['svs:ValueSet'];
@@ -35,7 +33,7 @@ ValueSet.load = function (endPoint, codingSystem) {
             return new ValueSet(allConcepts);
 	};
 	var fallback = new ValueSet();
-	var res = reader.load(createValueSet, fallback);
+	var res = hwr.load(createValueSet, fallback);
 	if (res) {
 	    cache[full_endpoint] = res;
 	    return res;
