@@ -4,7 +4,7 @@ var Config = function() {
     var rawJson = fs.readFileSync(__dirname + '/../config/hero-config.' + env + '.json');
     var config = JSON.parse(rawJson);
 
-    config.authentication = JSON.parse(fs.readFileSync(__dirname + '/../config/hero-auth-config.json'));
+    config.authentication = JSON.parse(fs.readFileSync(__dirname + '/../config/hero-auth-config.' + env + '.json'));
 
     return config;
 };

@@ -1,4 +1,5 @@
 var fs = require('fs');
+var request = require('request');
 
 var Practitioner = require(__dirname + '/practitioner');
 var Location = require(__dirname + '/location');
@@ -11,7 +12,7 @@ var Config = require(__dirname + '/config');
 var config = new Config();
 
 function writeToCache(contacts) {
-    fs.writeFileSync(cacheFile, JSON.stringify(contacts));
+    fs.writeFileSync(cacheFile, JSON.stringify(contacts,null));
 }
 
 function readFromCache() {
@@ -19,8 +20,11 @@ function readFromCache() {
     return JSON.parse(rawJson);
 }
 
+function updatePractitionerInHwr(contact, responseContact) {
+    return Practitioner.createRapidProIdInHwr(contact.fields.globalid, responseContact.uuid);
+}
+
 function postContactToRapidPro(rapidProContactEndPoint, contact, logFile) {
-    var request = require('request');
 
     function logFailure(body) {
         process.stdout.write('E');
@@ -41,8 +45,14 @@ function postContactToRapidPro(rapidProContactEndPoint, contact, logFile) {
     }, function (error, response, body) {
         try {
             var responseContact = JSON.parse(body);
-            if (responseContact.phone && responseContact.name && responseContact.groups) {
-                process.stdout.write('.');
+            if (responseContact.uuid) {
+                if(contact.uuid) {
+                    process.stdout.write('.');
+                } else {
+                    updatePractitionerInHwr(contact, responseContact).then(function () {
+                        process.stdout.write('.');
+                    });
+                }
             } else {
                 logFailure(body);
             }
@@ -64,7 +74,7 @@ var Hero = function () {
                 return Organisation.loadAll(organisationEndPoint).then(function (allOrganisations) {
                     var mergedPractitioners = Practitioner.merge(allPractitioners, allLocations, allOrganisations);
                     console.log(mergedPractitioners.length.toString() + ' practitioners downloaded from HWR');
-                    return Practitioner.formatForRapidPro(mergedPractitioners).then(function(allContacts) {
+                    return Practitioner.formatForRapidPro(mergedPractitioners).then(function (allContacts) {
                         writeToCache(allContacts);
                         console.log(allContacts.length.toString() + ' contacts put into cache');
                     });
@@ -74,7 +84,7 @@ var Hero = function () {
     };
 
     this.push = function () {
-        var rapidProContactEndPoint = config.rapidProContactEndPoint;
+        var rapidProContactEndPoint = config.rapidProAPIEndPoint + "/contacts.json";
         var allContacts = readFromCache();
 
         var logFile = fs.createWriteStream(runDir + '/push.log', {flags: 'w'});

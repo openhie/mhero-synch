@@ -1,19 +1,23 @@
 var FeedReader = function(modelClass, endPointUrl) {
     this.loadAll = function() {
-
-        var XmlFeedReader = require(__dirname + '/xml-feed-reader');
-        var reader = new XmlFeedReader(endPointUrl);
-
+        var HwrEndPoint = require(__dirname + '/hwr-end-point');
+        var hwr = new HwrEndPoint(endPointUrl);
         var createModelObjects = function(result) {
             var atomEntries = result['atom:feed']['atom:entry'];
-            return atomEntries.map(function(atomEntry) {
-                var json = atomEntry['atom:content'][0]['_'];
-                return new modelClass(json);
-            });
+	    if (atomEntries) {
+		console.log("Feed has " + (atomEntries.length) + " from: "  + endPointUrl);
+		return atomEntries.map(function(atomEntry) {
+                    var json = atomEntry['atom:content'][0]['_'];
+                    return new modelClass(json);
+		});
+	    } else {
+		console.log("Feed is empty from: "  + endPointUrl);
+		return [];
+	    }
         };
         var fallback = [];
 
-        return reader.load(createModelObjects, fallback);
+        return hwr.load(createModelObjects, fallback);
     }
 };
 

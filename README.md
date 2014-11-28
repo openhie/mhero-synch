@@ -16,14 +16,14 @@ Prepare your environment:
 
 Run test:
 
-* cp config/hero-config.sample.json config/hero-config.dev.json
-* (edit config/hero-config.dev.json to fit your config)
+* cp config/hero-auth-config.sample.json config/hero-auth-config.dev.json
+* (Edit config/hero-auth-config.dev.json to fit your config. Please use "ThoughtWorkers.org" for rapidpro.instance)
 * grunt 
 
 Pull and push data:
 
-* cp config/hero-config.sample.json config/hero-config.staging.json
-* (edit config/hero-config.staging.json to fit your config)
+* cp config/hero-auth-config.sample.json config/hero-auth-config.staging.json
+* (Edit config/hero-auth-config.staging.json to fit your config)
 * ./scripts/heracles.js (to pull data)
 * ./scripts/sisyphus.js (to push data)
 

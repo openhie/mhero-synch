@@ -1,6 +1,6 @@
 var Organisation = function (jsonInFeed) {
     var jsonContent = JSON.parse(jsonInFeed);
-    this.globalId = jsonContent.identifier[0].value;
+    this.globalid = jsonContent.identifier[0].value;
     this.name = jsonContent.name;
     this.parentId = getParentId();
 

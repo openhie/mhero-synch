@@ -1,19 +1,21 @@
 var Q = require('q');
 
-// FIXME: environment should be controlled by a global environment variable
-// FIXME: basic authentication should be extracted from config
 var Config = require(__dirname + '/config');
 var config = new Config();
 
 var ValueSet = require(__dirname + '/value-set');
 
+var rapidProIdAssigner = 'http://rapidpro.io/' + config.authentication.rapidpro.instance;
+
 var Practitioner = function (jsonInFeed) {
     var jsonContent = JSON.parse(jsonInFeed);
-    this.globalId = jsonContent.identifier[0].value;
+    this.globalid = jsonContent.identifier[0].value;
+    this.rapidProId = findIdByAssigner(rapidProIdAssigner);
     this.role = jsonContent.role;
     this.parentId = getParentId();
     this.familyName = getName('family');
     this.givenName = getName('given');
+    this.textName = jsonContent.name.text;
     this.email = getContact(jsonContent, 'EMAIL');
     this.phone = getContact(jsonContent, 'BP');
 
@@ -47,7 +49,10 @@ var Practitioner = function (jsonInFeed) {
     };
 
     this.fullName = function () {
-        return this.familyName + ' ' + this.givenName;
+        if (this.familyName && this.givenName) {
+            return this.familyName + ' ' + this.givenName;
+        }
+        return this.textName;
     };
 
     this.formalisedPhoneNumber = function () {
@@ -58,8 +63,12 @@ var Practitioner = function (jsonInFeed) {
 
         var phoneNumber = rawPhoneNumber.split('/')[0].trim().replace(/[^\d\+]/g, '');
 
-        if (phoneNumber[0] != '0') {
+        if (phoneNumber[0] == '+') {
             return phoneNumber;
+        }
+
+        if (phoneNumber[0] != '0') {
+            return config.countryCode + phoneNumber;
         }
 
         if (phoneNumber[1] == '0') {
@@ -72,10 +81,12 @@ var Practitioner = function (jsonInFeed) {
     this.toRapidProContact = function () {
         var contact = {
             name: this.fullName(),
+            uuid: this.rapidProId,
             phone: this.formalisedPhoneNumber(),
             groups: this.groups(),
             fields: {
-                globalId: this.globalId
+                globalid: this.globalid,
+                facility: this.parent ? this.parent.name : ''
             }
         };
         return this.cadres().then(function (cadres) {
@@ -84,6 +95,14 @@ var Practitioner = function (jsonInFeed) {
             return contact;
         });
     };
+
+    function findIdByAssigner(assigner) {
+        var allIds = jsonContent.identifier;
+        var foundIds = allIds.filter(function (id) {
+            return id.assigner === assigner;
+        });
+        return foundIds.length > 0 ? foundIds[0].value : null;
+    }
 
     function getName(postfix) {
         var name = jsonContent.name[postfix];
@@ -98,7 +117,10 @@ var Practitioner = function (jsonInFeed) {
         if (location && location.length > 0) {
             return location[0].reference;
         }
-        return jsonContent.organization.reference;
+        if (jsonContent.organization) {
+            return jsonContent.organization.reference;
+        }
+        return null;
     }
 
     function getContact(jsonContent, contactField) {
@@ -124,9 +146,9 @@ Practitioner.loadAll = function (url) {
 Practitioner.merge = function (allPractitioners, allLocations, allOrganisations) {
     var allObjects = allPractitioners.concat(allLocations).concat(allOrganisations);
 
-    function findById(allObjects, globalId) {
+    function findById(allObjects, globalid) {
         return allObjects.filter(function (object) {
-            return object.globalId == globalId;
+            return object.globalid == globalid;
         })[0];
     }
 
@@ -136,7 +158,7 @@ Practitioner.merge = function (allPractitioners, allLocations, allOrganisations)
 
     allLocations.forEach(function (location) {
         if (!location.parent) {
-            throw '[DATA ERROR] Location must have a parent, but this does not: ' + location.globalId;
+            throw '[DATA ERROR] Location must have a parent, but this does not: ' + location.globalid;
         }
     });
 
@@ -148,6 +170,23 @@ Practitioner.formatForRapidPro = function (allPractitioners) {
         return practitioner.toRapidProContact();
     });
     return Q.all(allPromises);
+};
+
+Practitioner.createRapidProIdInHwr = function (practitionerId, rapidProId) {
+    var dataLoad =
+        "<?xml version='1.0' encoding='utf-8'?>" +
+        "<csd:careServicesRequest xmlns:csd='urn:ihe:iti:csd:2013' xmlns='urn:ihe:iti:csd:2013'>" +
+        "   <function urn='urn:openhie.org:openinfoman-hwr:stored-function:health_worker_create_otherid'>" +
+        "       <requestParams>" +
+        "           <id urn='" + practitionerId + "'/>" +
+        "           <otherID assigningAuthorityName='" + rapidProIdAssigner + "' code='" + rapidProId + "' />" +
+        "       </requestParams>" +
+        "   </function>" +
+        "</csd:careServicesRequest>";
+
+    var HwrEndPoint = require(__dirname + '/hwr-end-point');
+    var hwr = new HwrEndPoint(config.practitionerUpdateEndPoint);
+    return hwr.update(dataLoad);
 };
 
 module.exports = Practitioner;

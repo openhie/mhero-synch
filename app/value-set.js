@@ -19,6 +19,8 @@ ValueSet.load = function (endPoint, codingSystem) {
 	return cache[full_endpoint];
     } else {
 	var reader = new XmlFeedReader(full_endpoint);
+	var HwrEndPoint = require(__dirname + '/hwr-end-point');
+	var hwr = new HwrEndPoint(full_endoint);
 
 	var createValueSet = function(result) {
             var rawValueSet = result['svs:RetrieveValueSetResponse']['svs:ValueSet'];

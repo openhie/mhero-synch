@@ -1,0 +1,1076 @@
+{
+  "campaigns": [], 
+  "version": 4, 
+  "site": "http://rapidpro.io", 
+  "flows": [
+    {
+      "definition": {
+        "entry": "61bd35c2-a89a-4460-bdcd-d9e298b640d5", 
+        "rule_sets": [
+          {
+            "uuid": "43a0bc2a-0339-49f4-ba23-2c15d6aac96a", 
+            "webhook_action": null, 
+            "rules": [
+              {
+                "test": {
+                  "test": "nick", 
+                  "type": "starts"
+                }, 
+                "category": "nick", 
+                "destination": "68ca16b9-da85-4109-9fb2-6d4716b4141c", 
+                "uuid": "afbd098c-27d9-4265-9a70-1051e49f49d3"
+              }, 
+              {
+                "test": {
+                  "test": "exit", 
+                  "type": "starts"
+                }, 
+                "category": "exit", 
+                "destination": "71295ed9-8ac5-4483-92f7-d4df3e97e5b7", 
+                "uuid": "616b9cde-0f98-4a9d-ae43-6f10f06072d7"
+              }, 
+              {
+                "test": {
+                  "test": "true", 
+                  "type": "true"
+                }, 
+                "category": "Other", 
+                "destination": "9855f0d5-8045-4269-a3e5-c0ddcc62e632", 
+                "uuid": "85545880-5b46-4e59-a699-a4bbe0a448e3"
+              }
+            ], 
+            "webhook": null, 
+            "label": "Commands", 
+            "operand": "@step.value", 
+            "finished_key": null, 
+            "response_type": "C", 
+            "y": 315, 
+            "x": 413
+          }
+        ], 
+        "action_sets": [
+          {
+            "y": 442, 
+            "x": 748, 
+            "destination": "43a0bc2a-0339-49f4-ba23-2c15d6aac96a", 
+            "uuid": "9855f0d5-8045-4269-a3e5-c0ddcc62e632", 
+            "actions": [
+              {
+                "type": "del_group", 
+                "groups": [
+                  {
+                    "name": "Group Chat", 
+                    "id": 2421
+                  }
+                ]
+              }, 
+              {
+                "msg": "@step.contact: @step.value", 
+                "variables": [], 
+                "type": "send", 
+                "groups": [
+                  {
+                    "name": "Group Chat", 
+                    "id": 2421
+                  }
+                ], 
+                "contacts": []
+              }, 
+              {
+                "type": "add_group", 
+                "groups": [
+                  {
+                    "name": "Group Chat", 
+                    "id": 2421
+                  }
+                ]
+              }, 
+              {
+                "msg": "Your message was sent.  Send 'nick [your name]' to set your name, send 'exit' to exit chat.", 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 441, 
+            "x": 446, 
+            "destination": null, 
+            "uuid": "71295ed9-8ac5-4483-92f7-d4df3e97e5b7", 
+            "actions": [
+              {
+                "type": "del_group", 
+                "groups": [
+                  {
+                    "name": "Group Chat", 
+                    "id": 2421
+                  }
+                ]
+              }, 
+              {
+                "msg": "@contact has left the group.", 
+                "variables": [], 
+                "type": "send", 
+                "groups": [
+                  {
+                    "name": "Group Chat", 
+                    "id": 2421
+                  }
+                ], 
+                "contacts": []
+              }, 
+              {
+                "msg": "You have left the chat.  Send 'join' to rejoin.", 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 444, 
+            "x": 148, 
+            "destination": "43a0bc2a-0339-49f4-ba23-2c15d6aac96a", 
+            "uuid": "68ca16b9-da85-4109-9fb2-6d4716b4141c", 
+            "actions": [
+              {
+                "type": "del_group", 
+                "groups": [
+                  {
+                    "name": "Group Chat", 
+                    "id": 2421
+                  }
+                ]
+              }, 
+              {
+                "msg": "@contact is now known as @step.value|remove_first_word ", 
+                "variables": [], 
+                "type": "send", 
+                "groups": [
+                  {
+                    "name": "Group Chat", 
+                    "id": 2421
+                  }
+                ], 
+                "contacts": []
+              }, 
+              {
+                "type": "add_group", 
+                "groups": [
+                  {
+                    "name": "Group Chat", 
+                    "id": 2421
+                  }
+                ]
+              }, 
+              {
+                "field": "name", 
+                "type": "save", 
+                "value": "@step.value|remove_first_word ", 
+                "label": "Contact Name"
+              }, 
+              {
+                "msg": "You are now known as @contact.", 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 0, 
+            "x": 446, 
+            "destination": "43a0bc2a-0339-49f4-ba23-2c15d6aac96a", 
+            "uuid": "61bd35c2-a89a-4460-bdcd-d9e298b640d5", 
+            "actions": [
+              {
+                "msg": "Welcome to group chat!  Send \"nick [your name]\" to set your name, send \"exit\" to exit.", 
+                "type": "reply"
+              }, 
+              {
+                "msg": "@contact has joined the group.", 
+                "variables": [], 
+                "type": "send", 
+                "groups": [
+                  {
+                    "name": "Group Chat", 
+                    "id": 2421
+                  }
+                ], 
+                "contacts": []
+              }, 
+              {
+                "type": "add_group", 
+                "groups": [
+                  {
+                    "name": "Group Chat", 
+                    "id": 2421
+                  }
+                ]
+              }
+            ]
+          }
+        ], 
+        "last_saved": "2014-11-03T10:57:24.613256Z", 
+        "metadata": {
+          "notes": [
+            {
+              "body": "You can use actions and clever routing in your flows to build complex applications.\n\nThis advanced flow creates an SMS \"chat room\". After joining, any message sent will be forwarded to the others in the room. They can change their name by sending \"nick [name]\" and they can exit the room by sending \"exit\".\n\nTo start using this flow, <a href='/trigger'>create a trigger</a> with the keyword \"join\" to start the flow.", 
+              "x": 59, 
+              "y": 0, 
+              "title": "Using Actions"
+            }
+          ]
+        }
+      }, 
+      "id": 11257, 
+      "flow_type": "F", 
+      "name": "Sample Flow -  Group Chat"
+    }, 
+    {
+      "definition": {
+        "entry": "7a09d014-c5c6-4188-b104-f2eb2b22d08d", 
+        "rule_sets": [
+          {
+            "uuid": "08ac86dd-108c-4f42-a361-59714fd52a45", 
+            "webhook_action": null, 
+            "rules": [
+              {
+                "test": {
+                  "test": "true", 
+                  "type": "true"
+                }, 
+                "category": "All Responses", 
+                "destination": "93aeb170-53fd-4df4-882f-fe8857e7477b", 
+                "uuid": "d2b683e0-61b3-48a9-8ad1-aece3fc65262"
+              }
+            ], 
+            "webhook": null, 
+            "label": "Comment", 
+            "operand": "@step.value", 
+            "finished_key": null, 
+            "response_type": "O", 
+            "y": 675, 
+            "x": 389
+          }, 
+          {
+            "uuid": "893b4ad0-3522-44c6-8c5f-010b0fbd1f8b", 
+            "webhook_action": null, 
+            "rules": [
+              {
+                "test": {
+                  "test": "Shipped", 
+                  "type": "contains"
+                }, 
+                "category": "Shipped", 
+                "destination": "bcbbedf7-f3f2-49cc-a6b5-fe9992865d26", 
+                "uuid": "578c8f32-2e22-4679-87b2-b1c310530844"
+              }, 
+              {
+                "test": {
+                  "test": "Pending", 
+                  "type": "contains"
+                }, 
+                "category": "Pending", 
+                "destination": "1e7cbfef-504e-4f17-a303-46bb5112843c", 
+                "uuid": "0e7f9728-1530-45dc-8948-f8de730c1520"
+              }, 
+              {
+                "test": {
+                  "test": "Cancelled", 
+                  "type": "contains"
+                }, 
+                "category": "Cancelled", 
+                "destination": "10017c7e-4f4b-4634-83a0-24f399f02cbe", 
+                "uuid": "887885a1-8156-45f6-8300-efdc66dc3fdd"
+              }, 
+              {
+                "test": {
+                  "test": "true", 
+                  "type": "true"
+                }, 
+                "category": "Other", 
+                "destination": "1b53e18f-9005-4aa9-b520-fb3a0d141d35", 
+                "uuid": "7d21fc91-b2c1-4b4e-a3e9-f42e6865bbe2"
+              }
+            ], 
+            "webhook": "https://textit.in/demo/status/", 
+            "label": "Lookup", 
+            "operand": "@extra.status", 
+            "finished_key": null, 
+            "response_type": "C", 
+            "y": 198, 
+            "x": 356
+          }, 
+          {
+            "uuid": "b8ec65cf-7564-4d08-98d6-a4723430e1b2", 
+            "webhook_action": null, 
+            "rules": [
+              {
+                "test": {
+                  "test": "true", 
+                  "type": "true"
+                }, 
+                "category": "All Responses", 
+                "destination": null, 
+                "uuid": "46ccb63f-d20d-4193-89f4-192002cfb85a"
+              }
+            ], 
+            "webhook": null, 
+            "label": "Extra Comments", 
+            "operand": "@step.value", 
+            "finished_key": null, 
+            "response_type": "O", 
+            "y": 1052, 
+            "x": 389
+          }
+        ], 
+        "action_sets": [
+          {
+            "y": 0, 
+            "x": 409, 
+            "destination": "893b4ad0-3522-44c6-8c5f-010b0fbd1f8b", 
+            "uuid": "7a09d014-c5c6-4188-b104-f2eb2b22d08d", 
+            "actions": [
+              {
+                "msg": "Thanks for contacting the ThriftShop order status system. Please send your order # and we'll help you in a jiffy!", 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 99, 
+            "x": 787, 
+            "destination": "893b4ad0-3522-44c6-8c5f-010b0fbd1f8b", 
+            "uuid": "1b53e18f-9005-4aa9-b520-fb3a0d141d35", 
+            "actions": [
+              {
+                "msg": "Sorry that doesn't look like a valid order number.  Maybe try: CU001, CU002 or CU003?", 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 372, 
+            "x": 167, 
+            "destination": "08ac86dd-108c-4f42-a361-59714fd52a45", 
+            "uuid": "bcbbedf7-f3f2-49cc-a6b5-fe9992865d26", 
+            "actions": [
+              {
+                "msg": "Great news @extra.name! We shipped your order for @extra.description on @extra.ship_date and we expect it will be delivered on @extra.delivery_date. If you have any questions, just reply and our customer service department will be notified.", 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 372, 
+            "x": 389, 
+            "destination": "08ac86dd-108c-4f42-a361-59714fd52a45", 
+            "uuid": "1e7cbfef-504e-4f17-a303-46bb5112843c", 
+            "actions": [
+              {
+                "msg": "Hi @extra.name.  Hope you are patient because we haven't shipped your order for @extra.description yet.  We expect to ship it by @extra.ship_date though. If you have any questions, just reply and our customer service department will be notified.", 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 374, 
+            "x": 612, 
+            "destination": "08ac86dd-108c-4f42-a361-59714fd52a45", 
+            "uuid": "10017c7e-4f4b-4634-83a0-24f399f02cbe", 
+            "actions": [
+              {
+                "msg": "Uh oh @extra.name!  Our record indicate that your order for @extra.description was cancelled on @extra.cancel_date. If you think this is in error, please reply with a comment and our orders department will get right on it!", 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 791, 
+            "x": 389, 
+            "destination": "b8ec65cf-7564-4d08-98d6-a4723430e1b2", 
+            "uuid": "93aeb170-53fd-4df4-882f-fe8857e7477b", 
+            "actions": [
+              {
+                "msg": "Thanks @extra.name, we'll be in touch ASAP about order # @extra.order.", 
+                "type": "reply"
+              }, 
+              {
+                "msg": "Customer @extra.name has a problem with their order @extra.order for @extra.description.  Please look into it ASAP and call them back with the status.\n \nCustomer Comment: \"@flow.comment\"\nCustomer Name: @extra.name\nCustomer Phone: @contact.tel ", 
+                "type": "email", 
+                "emails": [
+                  "evanmwheeler+mherodevelopment@gmail.com"
+                ], 
+                "subject": "Order Comment: @flow.lookup: @extra.order"
+              }
+            ]
+          }
+        ], 
+        "last_saved": "2014-11-03T10:57:24.687324Z", 
+        "metadata": {
+          "notes": [
+            {
+              "body": "This flow demonstrates looking up an order using a webhook and giving the user different options based on the results.  After looking up the order the user has the option to send additional comments which are forwarded to customer support representatives.\n\nUse order numbers CU001, CU002 or CU003 to see the different cases in action.", 
+              "x": 59, 
+              "y": 0, 
+              "title": "Using Your Own Data"
+            }
+          ]
+        }
+      }, 
+      "id": 11258, 
+      "flow_type": "F", 
+      "name": "Sample Flow -  Order Status Checker"
+    }, 
+    {
+      "definition": {
+        "entry": "54c34bea-0cfa-4f99-b2c4-ebf530a21d68", 
+        "rule_sets": [
+          {
+            "uuid": "43c85754-5def-4987-92fa-978a43c274c4", 
+            "webhook_action": null, 
+            "rules": [
+              {
+                "test": {
+                  "test": "yes sure yep ok", 
+                  "type": "contains_any"
+                }, 
+                "category": "Yes", 
+                "destination": "d3b85118-7c41-4dda-91e7-65fce2640e0d", 
+                "uuid": "ecb6e11d-f9f8-4476-af5c-d1d445e0549b"
+              }, 
+              {
+                "test": {
+                  "test": "true", 
+                  "type": "true"
+                }, 
+                "category": "Other", 
+                "destination": "1f313a75-d119-407a-9e7c-4a976d776e3e", 
+                "uuid": "c5bef9e8-0ff9-4757-bdd8-9c19303a0cef"
+              }
+            ], 
+            "webhook": null, 
+            "label": "Take Poll", 
+            "operand": "@step.value", 
+            "finished_key": null, 
+            "response_type": "C", 
+            "y": 331, 
+            "x": 408
+          }, 
+          {
+            "uuid": "1c6dd218-fce3-4b10-9433-4dcf7dbee0f7", 
+            "webhook_action": null, 
+            "rules": [
+              {
+                "test": {
+                  "test": "1", 
+                  "type": "eq"
+                }, 
+                "category": "1", 
+                "destination": "a1ff34bd-7aa5-4f8a-be1a-d399190e96e3", 
+                "uuid": "69cb9d9a-d3e4-40b0-b95a-5ec1e99ec48c"
+              }, 
+              {
+                "test": {
+                  "test": "2", 
+                  "type": "eq"
+                }, 
+                "category": "2", 
+                "destination": "a1ff34bd-7aa5-4f8a-be1a-d399190e96e3", 
+                "uuid": "f570cb7a-71d9-48ea-820a-9edd95598418"
+              }, 
+              {
+                "test": {
+                  "test": "3", 
+                  "type": "eq"
+                }, 
+                "category": "3", 
+                "destination": "a1ff34bd-7aa5-4f8a-be1a-d399190e96e3", 
+                "uuid": "ea52845f-53a3-4706-8be3-f0db47f150d8"
+              }, 
+              {
+                "test": {
+                  "test": "4", 
+                  "type": "eq"
+                }, 
+                "category": "4", 
+                "destination": "24ace2c3-40e9-4193-acfd-2917006f2916", 
+                "uuid": "77b47993-1562-4bcf-8f80-5057fb8035e1"
+              }, 
+              {
+                "test": {
+                  "test": "5", 
+                  "type": "eq"
+                }, 
+                "category": "5", 
+                "destination": "24ace2c3-40e9-4193-acfd-2917006f2916", 
+                "uuid": "b740a125-1c45-4e83-9559-22a16725b13e"
+              }, 
+              {
+                "test": {
+                  "test": "true", 
+                  "type": "true"
+                }, 
+                "category": "Other", 
+                "destination": "9702c6cd-a47d-4211-8a48-b92cd799ca2e", 
+                "uuid": "5dc4f098-2271-496c-9e95-6c7256518513"
+              }
+            ], 
+            "webhook": null, 
+            "label": "Shop Again", 
+            "operand": "@step.value", 
+            "finished_key": null, 
+            "response_type": "C", 
+            "y": 642, 
+            "x": 200
+          }, 
+          {
+            "uuid": "8193f03e-dd25-493e-b102-618d09c631c9", 
+            "webhook_action": null, 
+            "rules": [
+              {
+                "test": {
+                  "test": "boy male man guy", 
+                  "type": "contains_any"
+                }, 
+                "category": "Male", 
+                "destination": "cc4267eb-ee8c-4e47-ae51-3b10ea0dae1f", 
+                "uuid": "1c72e5e7-529f-45e6-92cd-bfb7c03d8ac7"
+              }, 
+              {
+                "test": {
+                  "test": "girl gal female woman", 
+                  "type": "contains_any"
+                }, 
+                "category": "Female", 
+                "destination": "cc4267eb-ee8c-4e47-ae51-3b10ea0dae1f", 
+                "uuid": "7d7107b8-577a-4a11-a8c0-a01dee23e4bb"
+              }, 
+              {
+                "test": {
+                  "test": "true", 
+                  "type": "true"
+                }, 
+                "category": "Other", 
+                "destination": "e85e9030-7e3a-40cf-9f3a-ffd4b1131d0e", 
+                "uuid": "d6f357d3-2e22-4925-8de2-a79b3c6983f3"
+              }
+            ], 
+            "webhook": null, 
+            "label": "Gender", 
+            "operand": "@step.value", 
+            "finished_key": null, 
+            "response_type": "C", 
+            "y": 1757, 
+            "x": 335
+          }, 
+          {
+            "uuid": "5fa68546-8814-4391-baf9-4d9b2c560880", 
+            "webhook_action": null, 
+            "rules": [
+              {
+                "test": {
+                  "test": "true", 
+                  "type": "true"
+                }, 
+                "category": "All Responses", 
+                "destination": "38a3c134-73dc-4e45-8eff-61e6aefa7c15", 
+                "uuid": "31296614-0a3e-4484-9a90-4e7f2f55864f"
+              }
+            ], 
+            "webhook": null, 
+            "label": "Suggestion", 
+            "operand": "@step.value", 
+            "finished_key": null, 
+            "response_type": "O", 
+            "y": 1459, 
+            "x": 360
+          }, 
+          {
+            "uuid": "92cc7ace-6eb4-4916-b725-2a411aec99f5", 
+            "webhook_action": null, 
+            "rules": [
+              {
+                "test": {
+                  "test": "true", 
+                  "type": "true"
+                }, 
+                "category": "All Responses", 
+                "destination": null, 
+                "uuid": "4112412c-1f38-49d9-93d5-586372255bcb"
+              }
+            ], 
+            "webhook": null, 
+            "label": "Extra Comments", 
+            "operand": "@step.value", 
+            "finished_key": null, 
+            "response_type": "O", 
+            "y": 2570, 
+            "x": 322
+          }, 
+          {
+            "uuid": "38c560d6-7247-433e-a5cc-0f2f45b277e3", 
+            "webhook_action": null, 
+            "rules": [
+              {
+                "test": {
+                  "test": "1", 
+                  "type": "eq"
+                }, 
+                "category": "1", 
+                "destination": "d72fca0d-2d5e-44e4-b2a2-5ea4e120547a", 
+                "uuid": "588bf84c-3104-4055-8133-1d639b8f9c85"
+              }, 
+              {
+                "test": {
+                  "test": "2", 
+                  "type": "eq"
+                }, 
+                "category": "2", 
+                "destination": "d72fca0d-2d5e-44e4-b2a2-5ea4e120547a", 
+                "uuid": "cfdd219c-91e3-4bac-9522-d0652e784f12"
+              }, 
+              {
+                "test": {
+                  "test": "3", 
+                  "type": "eq"
+                }, 
+                "category": "3", 
+                "destination": "d72fca0d-2d5e-44e4-b2a2-5ea4e120547a", 
+                "uuid": "aa8fafeb-4110-417b-beda-1966b75c030a"
+              }, 
+              {
+                "test": {
+                  "test": "4", 
+                  "type": "eq"
+                }, 
+                "category": "4", 
+                "destination": "f00238d4-edbe-4af0-90d1-a9bac2ad818c", 
+                "uuid": "4bc908a9-99c2-430e-aeb9-105d81f0b8fe"
+              }, 
+              {
+                "test": {
+                  "test": "5", 
+                  "type": "eq"
+                }, 
+                "category": "5", 
+                "destination": "f00238d4-edbe-4af0-90d1-a9bac2ad818c", 
+                "uuid": "6bc330ad-c2ff-407c-a46e-763a7d87d5bd"
+              }, 
+              {
+                "test": {
+                  "test": "true", 
+                  "type": "true"
+                }, 
+                "category": "Other", 
+                "destination": "3f4a6824-ca98-4ad3-81a5-b7cdc721091e", 
+                "uuid": "4310a20f-9dc7-4605-b1f3-7be0b84aa755"
+              }
+            ], 
+            "webhook": null, 
+            "label": "Recommend", 
+            "operand": "@step.value", 
+            "finished_key": null, 
+            "response_type": "C", 
+            "y": 1065, 
+            "x": 200
+          }, 
+          {
+            "uuid": "2c5aa4ed-2389-4a29-aa0f-4ede806834c7", 
+            "webhook_action": null, 
+            "rules": [
+              {
+                "test": {
+                  "max": "120", 
+                  "type": "between", 
+                  "min": "1"
+                }, 
+                "destination": "5d6dcdd0-091b-4bb3-a967-f331b00e1903", 
+                "uuid": "4f4a319f-e6df-4109-b905-e4cd9afc8d66"
+              }, 
+              {
+                "test": {
+                  "test": "true", 
+                  "type": "true"
+                }, 
+                "category": "Other", 
+                "destination": "3b7a54fb-f8d8-4a56-9c36-728bbe8a0fc6", 
+                "uuid": "a806bae1-c3ab-476a-96fe-8f12bbfa9553"
+              }
+            ], 
+            "webhook": null, 
+            "label": "Age", 
+            "operand": "@step.value", 
+            "finished_key": null, 
+            "response_type": "N", 
+            "y": 2091, 
+            "x": 372
+          }, 
+          {
+            "uuid": "17575d9c-7604-4857-bce9-202f25fec98a", 
+            "webhook_action": null, 
+            "rules": [
+              {
+                "test": {
+                  "test": "true", 
+                  "type": "true"
+                }, 
+                "category": "All Responses", 
+                "destination": null, 
+                "uuid": "e88fdd5d-f115-40b9-996c-c73ca3da30bc"
+              }
+            ], 
+            "webhook": null, 
+            "label": "Extra Comments", 
+            "operand": "@step.value", 
+            "finished_key": null, 
+            "response_type": "O", 
+            "y": 393, 
+            "x": 712
+          }
+        ], 
+        "action_sets": [
+          {
+            "y": 926, 
+            "x": 814, 
+            "destination": "38c560d6-7247-433e-a5cc-0f2f45b277e3", 
+            "uuid": "3f4a6824-ca98-4ad3-81a5-b7cdc721091e", 
+            "actions": [
+              {
+                "msg": "Sorry I didn't understand that, please answer with 1-5. With 5 being most likely, how likely would you be to recommend us to a friend?", 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 1210, 
+            "x": 233, 
+            "destination": "5fa68546-8814-4391-baf9-4d9b2c560880", 
+            "uuid": "d72fca0d-2d5e-44e4-b2a2-5ea4e120547a", 
+            "actions": [
+              {
+                "msg": "Well clearly we have to do better! What could we do to improve our services and have you recommend us more highly to a friend?", 
+                "type": "reply"
+              }, 
+              {
+                "type": "add_group", 
+                "groups": [
+                  {
+                    "name": "Unsatisfied Customers", 
+                    "id": 2423
+                  }
+                ]
+              }
+            ]
+          }, 
+          {
+            "y": 1212, 
+            "x": 485, 
+            "destination": "5fa68546-8814-4391-baf9-4d9b2c560880", 
+            "uuid": "f00238d4-edbe-4af0-90d1-a9bac2ad818c", 
+            "actions": [
+              {
+                "msg": "That is always nice to hear, thanks, but I'm sure we could do even better, what could we do to improve?", 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 1550, 
+            "x": 360, 
+            "destination": "8193f03e-dd25-493e-b102-618d09c631c9", 
+            "uuid": "38a3c134-73dc-4e45-8eff-61e6aefa7c15", 
+            "actions": [
+              {
+                "msg": "Ok, thanks, we'll definitely consider that.  Ok, two last questions and then you're all done, are you male or female?", 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 437, 
+            "x": 228, 
+            "destination": "1c6dd218-fce3-4b10-9433-4dcf7dbee0f7", 
+            "uuid": "d3b85118-7c41-4dda-91e7-65fce2640e0d", 
+            "actions": [
+              {
+                "msg": "Great! Don't worry, this will be quick. On a scale of 1-5, with 1 being not likely and 5 being very likely, how likely would you be to shop with us again?", 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 0, 
+            "x": 408, 
+            "destination": "43c85754-5def-4987-92fa-978a43c274c4", 
+            "uuid": "54c34bea-0cfa-4f99-b2c4-ebf530a21d68", 
+            "actions": [
+              {
+                "msg": "Hi @contact.name! You've been selected to partake in a quick five question survey about your experience at the ThriftShop. As a thanks for participating you'll receive a 5% discount on your next visit.  Do you want to participate?", 
+                "type": "reply"
+              }, 
+              {
+                "type": "add_group", 
+                "groups": [
+                  {
+                    "name": "Survey Audience", 
+                    "id": 2422
+                  }
+                ]
+              }
+            ]
+          }, 
+          {
+            "y": 1901, 
+            "x": 645, 
+            "destination": "2c5aa4ed-2389-4a29-aa0f-4ede806834c7", 
+            "uuid": "3b7a54fb-f8d8-4a56-9c36-728bbe8a0fc6", 
+            "actions": [
+              {
+                "msg": "I know, I know, nobody likes to think about their age, but we promise not to share it with anyone else. Come on, how old are you?", 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 2217, 
+            "x": 322, 
+            "destination": "92cc7ace-6eb4-4916-b725-2a411aec99f5", 
+            "uuid": "5d6dcdd0-091b-4bb3-a967-f331b00e1903", 
+            "actions": [
+              {
+                "action": "POST", 
+                "type": "api", 
+                "webhook": "https://textit.in/demo/coupon/"
+              }, 
+              {
+                "msg": "Thanks you so much for your time! Your coupon code is \"@extra.coupon\", which you can use at any of our stores. Have a great day.", 
+                "type": "reply"
+              }, 
+              {
+                "msg": "A new survey was just completed by @contact (@contact.tel).\n\nShop Again: @flow.shop_again  \nRecommend: @flow.recommend \nSuggestion: \"@flow.suggestion\"\n\nSurvey completed by @flow.age year old @flow.gender.category at @flow.gender.time.", 
+                "type": "email", 
+                "emails": [
+                  "evanmwheeler+mherodevelopment@gmail.com"
+                ], 
+                "subject": "New Survey Completion"
+              }
+            ]
+          }, 
+          {
+            "y": 1887, 
+            "x": 370, 
+            "destination": "2c5aa4ed-2389-4a29-aa0f-4ede806834c7", 
+            "uuid": "cc4267eb-ee8c-4e47-ae51-3b10ea0dae1f", 
+            "actions": [
+              {
+                "msg": "Great, one last question, and don't worry we promise not to tell anyone else.  How old are you?", 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 1586, 
+            "x": 651, 
+            "destination": "8193f03e-dd25-493e-b102-618d09c631c9", 
+            "uuid": "e85e9030-7e3a-40cf-9f3a-ffd4b1131d0e", 
+            "actions": [
+              {
+                "msg": "I'm sorry, I didn't understand that! We're almost done though so let's try again.  Are you male or female?", 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 771, 
+            "x": 485, 
+            "destination": "38c560d6-7247-433e-a5cc-0f2f45b277e3", 
+            "uuid": "24ace2c3-40e9-4193-acfd-2917006f2916", 
+            "actions": [
+              {
+                "msg": "Thanks, it is great to hear we did a good job. Rest assured we still strive to improve every single day. Ok, so on a scale 1-5, with 5 being most likely, how likely would you be to recommend us to a friend?", 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 771, 
+            "x": 233, 
+            "destination": "38c560d6-7247-433e-a5cc-0f2f45b277e3", 
+            "uuid": "a1ff34bd-7aa5-4f8a-be1a-d399190e96e3", 
+            "actions": [
+              {
+                "msg": "I'm sorry to hear that, we are always trying to improve and that is why we appreciate your time today. On a scale of 1-5, with 5 being most likely, how likely would you be to recommend us to a friend?", 
+                "type": "reply"
+              }, 
+              {
+                "type": "add_group", 
+                "groups": [
+                  {
+                    "name": "Unsatisfied Customers", 
+                    "id": 2423
+                  }
+                ]
+              }
+            ]
+          }, 
+          {
+            "y": 517, 
+            "x": 804, 
+            "destination": "1c6dd218-fce3-4b10-9433-4dcf7dbee0f7", 
+            "uuid": "9702c6cd-a47d-4211-8a48-b92cd799ca2e", 
+            "actions": [
+              {
+                "msg": "Sorry, I didn't understand that. From 1-5, with 5 best most likely, how likely are you to shop with us again?", 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 190, 
+            "x": 712, 
+            "destination": "17575d9c-7604-4857-bce9-202f25fec98a", 
+            "uuid": "1f313a75-d119-407a-9e7c-4a976d776e3e", 
+            "actions": [
+              {
+                "msg": "No problem, we understand you must be busy, thank you for your time!", 
+                "type": "reply"
+              }, 
+              {
+                "type": "del_group", 
+                "groups": [
+                  {
+                    "name": "Survey Audience", 
+                    "id": 2422
+                  }
+                ]
+              }
+            ]
+          }
+        ], 
+        "last_saved": "2014-11-03T10:57:24.742146Z", 
+        "metadata": {
+          "notes": [
+            {
+              "body": "This flow demonstrates a simple customer satisfaction survey that rewards completers with a unique coupon generated by a webhook.", 
+              "x": 70, 
+              "y": 43, 
+              "title": "Customer Survey"
+            }
+          ]
+        }
+      }, 
+      "id": 11259, 
+      "flow_type": "F", 
+      "name": "Sample Flow -  Satisfaction Survey"
+    }, 
+    {
+      "definition": {
+        "entry": "600b4e69-1e60-431c-81c5-760beacc170f", 
+        "rule_sets": [
+          {
+            "uuid": "61df0036-db2c-4155-991f-1d018f736cd0", 
+            "webhook_action": null, 
+            "rules": [
+              {
+                "test": {
+                  "test": "Yes Yep Y Ya", 
+                  "type": "contains_any"
+                }, 
+                "category": "Yes", 
+                "destination": "bd7ab266-e0e7-4b7c-ae62-e3248d9a5860", 
+                "uuid": "7b229edd-bba1-4835-a16d-4871e7d1c806"
+              }, 
+              {
+                "test": {
+                  "test": "No Nope N Nay", 
+                  "type": "contains_any"
+                }, 
+                "category": "No", 
+                "destination": "1af430c6-e297-45cb-9a62-de9f9ee8de1a", 
+                "uuid": "9baeccdf-d046-4c1b-b7ff-f971bbfb381e"
+              }, 
+              {
+                "test": {
+                  "test": "true", 
+                  "type": "true"
+                }, 
+                "category": "Other", 
+                "destination": "92e3a35a-5061-4fcc-b2a7-be13fafd92dd", 
+                "uuid": "c5ef40b8-0f6d-4cd0-a720-06216e64ced5"
+              }
+            ], 
+            "webhook": null, 
+            "label": "Filter Working", 
+            "operand": "@step.value", 
+            "finished_key": null, 
+            "response_type": "C", 
+            "y": 181, 
+            "x": 436
+          }
+        ], 
+        "action_sets": [
+          {
+            "y": 346, 
+            "x": 543, 
+            "destination": null, 
+            "uuid": "1af430c6-e297-45cb-9a62-de9f9ee8de1a", 
+            "actions": [
+              {
+                "msg": "Sorry to hear that, someone will be in touch to help you with your filter.", 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 346, 
+            "x": 303, 
+            "destination": null, 
+            "uuid": "bd7ab266-e0e7-4b7c-ae62-e3248d9a5860", 
+            "actions": [
+              {
+                "msg": "Great to hear, Thanks for your time!", 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 60, 
+            "x": 790, 
+            "destination": "61df0036-db2c-4155-991f-1d018f736cd0", 
+            "uuid": "92e3a35a-5061-4fcc-b2a7-be13fafd92dd", 
+            "actions": [
+              {
+                "msg": "I'm sorry, I didn't understand that. Is your water filter still working?  Answer with Yes or No.", 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 0, 
+            "x": 469, 
+            "destination": "61df0036-db2c-4155-991f-1d018f736cd0", 
+            "uuid": "600b4e69-1e60-431c-81c5-760beacc170f", 
+            "actions": [
+              {
+                "msg": "Hi @contact.name, is your water filter working?  Answer with Yes or No.", 
+                "type": "reply"
+              }
+            ]
+          }
+        ], 
+        "last_saved": "2014-11-03T10:57:24.757500Z", 
+        "metadata": {
+          "notes": [
+            {
+              "body": "This single question poll demonstrates how TextIt can easily help measure what is happening in the field.", 
+              "x": 93, 
+              "y": 59, 
+              "title": "Simple Poll"
+            }
+          ]
+        }
+      }, 
+      "id": 11260, 
+      "flow_type": "F", 
+      "name": "Sample Flow -  Simple Poll"
+    }
+  ], 
+  "triggers": []
+}
