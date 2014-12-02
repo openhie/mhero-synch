@@ -8,6 +8,7 @@ var ValueSet = require(__dirname + '/value-set');
 var rapidProIdAssigner = 'http://rapidpro.io/' + config.authentication.rapidpro.instance;
 
 var Practitioner = function (jsonInFeed) {
+//    console.log(jsonInFeed);
     var jsonContent = JSON.parse(jsonInFeed);
     this.globalid = jsonContent.identifier[0].value;
     this.rapidProId = findIdByAssigner(rapidProIdAssigner);
@@ -148,7 +149,11 @@ Practitioner.merge = function (allPractitioners, allLocations, allOrganisations)
 
     function findById(allObjects, globalid) {
         return allObjects.filter(function (object) {
-            return object.globalid == globalid;
+	    if (globalid != undefined && object.globalid != undefined) {
+		return object.globalid.toUpperCase() == globalid.toUpperCase();
+	    } else {
+		return false;
+	    }
         })[0];
     }
 
