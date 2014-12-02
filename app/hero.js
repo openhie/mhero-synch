@@ -1,5 +1,6 @@
 var fs = require('fs');
-var request = require('request');
+//var request = require('request');
+var syncrequest = require('sync-request');
 
 var Practitioner = require(__dirname + '/practitioner');
 var Location = require(__dirname + '/location');
@@ -32,34 +33,41 @@ function postContactToRapidPro(rapidProContactEndPoint, contact, logFile) {
             + '--> pushing data\n'
             + JSON.stringify(contact) + '\n'
             + '<-- getting response\n'
-            + body + '\n');
+            + body + '\n' );
     }
 
-    request.post({
-        headers: {
-            'content-type': 'application/json',
-            Authorization: 'Token ' + config.authentication.rapidpro.token
-        },
-        url: rapidProContactEndPoint,
-        body: JSON.stringify(contact)
-    }, function (error, response, body) {
-        try {
-            var responseContact = JSON.parse(body);
-            if (responseContact.uuid) {
-                if(contact.uuid) {
-                    process.stdout.write('.');
-                } else {
-                    updatePractitionerInHwr(contact, responseContact).then(function () {
-                        process.stdout.write('.');
-                    });
-                }
+    
+    try {	    
+	var response = syncrequest(
+	    'POST',
+	    rapidProContactEndPoint,
+	    {
+		headers: {
+		    'content-type': 'application/json',
+		    Authorization: 'Token ' + config.authentication.rapidpro.token
+		},
+		body: JSON.stringify(contact)
+	    }
+	);
+	var body = response.getBody();
+        var responseContact = JSON.parse(body);
+        if (responseContact.uuid) {
+            if(contact.uuid) {
+                process.stdout.write('.');
             } else {
-                logFailure(body);
+                updatePractitionerInHwr(contact, responseContact).then(function () {
+                    process.stdout.write('.');
+                });
             }
-        } catch (error) {
+        } else {
             logFailure(body);
+	    return false;
         }
-    });
+    } catch (error) {
+        logFailure(body);
+	return false;
+    }
+    return true;
 }
 
 var Hero = function () {
@@ -93,11 +101,13 @@ var Hero = function () {
             return contact.phone;
         });
 
-        console.log('Now, pushing ' + contactsWithPhoneNumber.length + ' contacts to RapidPro.');
-
-        contactsWithPhoneNumber.forEach(function (contact) {
-            postContactToRapidPro(rapidProContactEndPoint, contact, logFile);
-        });
+        console.log('Now, doing a sync. push of ' + contactsWithPhoneNumber.length + ' contacts to RapidPro.');
+	var len = contactsWithPhoneNumber.length;
+	for (var i = 0; i < len; i++) {
+            if ( postContactToRapidPro(rapidProContactEndPoint, contactsWithPhoneNumber[i], logFile)) {
+                process.stdout.write('.');
+	    }
+	}
     };
 };
 
